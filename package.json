@@ -1,10 +1,10 @@
 {
-  "name": "boilerplate-base",
+  "name": "multi-serializer",
   "description": "This project is just a template for creation of new projects",
   "version": "0.0.0",
   "private": true,
   "author": {
-    "name": "Thiago O Santos <tos.oliveira@gmail.com>"
+    "name": "Gustavo S. Rodrigues <gustavo.beavis@gmail.com>"
   },
   "engines": {
     "node": ">=10"
@@ -62,11 +62,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/codibre/boilerplate-base.git"
+    "url": "https://github.com/codibre/multi-serializer.git"
   },
-  "homepage": "https://github.com/codibre/boilerplate-base#readme",
+  "homepage": "https://github.com/codibre/multi-serializer#readme",
   "bugs": {
-    "url": "https://github.com/codibre/boilerplate-base/issues"
+    "url": "https://github.com/codibre/multi-serializer/issues"
   },
   "keywords": [],
   "license": "MIT",
