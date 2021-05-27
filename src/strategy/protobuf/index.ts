@@ -1,24 +1,27 @@
-import { Stream, Transform } from 'stream';
-import { SerializerStrategy, StrategyOptions } from '..';
+import { Stream } from 'stream';
+import { ProtobufTransform } from '../../utils/protobuf-transform';
+import { SerializerStrategy, TransformStrategy } from '..';
 import { load, Root, Type } from 'protobufjs';
+import { createGunzip, createGzip } from 'zlib';
+import { ProtobufOptions } from './protobuf-options';
 
 export class ProtobufStrategy implements SerializerStrategy {
-	private loadOptions(options?: StrategyOptions) {
-		if (!options?.interface) {
-			throw new Error('No Proto description in interface');
-		}
+	private options!: ProtobufOptions;
+	private context!: Promise<Type>;
 
-		return options;
+	constructor(options: ProtobufOptions) {
+		this.options = options;
+		this.context = this.load(options);
 	}
 
-	private async load(options: StrategyOptions): Promise<Type> {
-		let type: Type | undefined;
-		await load(options.interface, (err: Error | null, root?: Root) => {
-			if (err) {
-				throw err;
-			}
-
-			type = root?.lookupType(options.context);
+	private async load(options: ProtobufOptions): Promise<Type> {
+		const type: Type | undefined = await new Promise(async (resolve) => {
+			await load(options.proto, (err: Error | null, root?: Root) => {
+				if (err) {
+					throw err;
+				}
+				resolve(root?.lookupType(options.attribute));
+			});
 		});
 
 		if (!type) {
@@ -26,29 +29,37 @@ export class ProtobufStrategy implements SerializerStrategy {
 		}
 		return type;
 	}
-	async serialize(content: Stream, options?: StrategyOptions): Promise<Stream> {
-		const internalOptions = this.loadOptions(options);
-		const context = await this.load(internalOptions);
-		const transform = new Transform({
-			transform: (chunk) => {
-				return context?.encode(chunk);
-			},
+	async serialize(content: Stream): Promise<Stream> {
+		const context = await this.context;
+		const transform = new ProtobufTransform({
+			strategy: TransformStrategy.SERIALIZE,
+			type: context,
 		});
 		content.pipe(transform);
-		return content;
+
+		if (this.options.gzip) {
+			const gz = createGzip();
+			transform.pipe(gz);
+			return gz;
+		}
+
+		return transform;
 	}
-	async deserialize(
-		content: Stream,
-		options?: StrategyOptions,
-	): Promise<Stream> {
-		const internalOptions = this.loadOptions(options);
-		const context = await this.load(internalOptions);
-		const transform = new Transform({
-			transform: (chunk) => {
-				return context?.decode(chunk);
-			},
+
+	async deserialize(content: Stream): Promise<Stream> {
+		const context = await this.context;
+		const transform = new ProtobufTransform({
+			strategy: TransformStrategy.DESERIALIZE,
+			type: context,
 		});
-		content.pipe(transform);
-		return content;
+
+		if (!this.options.gzip) {
+			return content.pipe(transform);
+		}
+		const unzip = createGunzip();
+		content.pipe(unzip);
+		unzip.pipe(transform);
+
+		return transform;
 	}
 }

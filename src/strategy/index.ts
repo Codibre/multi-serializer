@@ -1,8 +1,12 @@
 import { Stream } from 'stream';
 
+export enum TransformStrategy {
+	SERIALIZE = 'serialize',
+	DESERIALIZE = 'deserialize',
+}
+
 export interface StrategyOptions {
-	interface: string | string[];
-	context: string;
+	gzip: boolean;
 }
 export interface SerializerStrategy {
 	serialize(
