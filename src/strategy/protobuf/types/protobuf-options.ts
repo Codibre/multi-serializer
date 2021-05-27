@@ -1,4 +1,4 @@
-import { StrategyOptions } from '..';
+import { StrategyOptions } from '../../../types';
 
 export interface ProtobufOptions extends StrategyOptions {
 	proto: string | string[];

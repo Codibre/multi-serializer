@@ -1,6 +1,6 @@
 import { Type } from 'protobufjs';
 import { Transform, TransformOptions } from 'stream';
-import { TransformStrategy } from '../strategy';
+import { TransformStrategy } from '../types';
 
 export interface ProtobufTransformOptions extends TransformOptions {
 	type: Type;

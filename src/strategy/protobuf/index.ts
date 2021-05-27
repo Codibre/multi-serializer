@@ -1,9 +1,10 @@
 import { Stream } from 'stream';
 import { ProtobufTransform } from '../../utils/protobuf-transform';
-import { SerializerStrategy, TransformStrategy } from '..';
+import { TransformStrategy } from '../../types';
+import { ProtobufOptions } from './types/';
 import { load, Root, Type } from 'protobufjs';
 import { createGunzip, createGzip } from 'zlib';
-import { ProtobufOptions } from './protobuf-options';
+import { SerializerStrategy } from '../serializer';
 
 export class ProtobufStrategy implements SerializerStrategy {
 	private options!: ProtobufOptions;

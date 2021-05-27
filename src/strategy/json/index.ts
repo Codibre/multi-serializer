@@ -1,7 +1,8 @@
 import { Stream } from 'stream';
-import { SerializerStrategy, TransformStrategy } from '..';
+import { TransformStrategy } from '../../types';
+import { SerializerStrategy } from '../serializer';
 import { createGunzip, createGzip } from 'zlib';
-import { JsonOptions } from './json-options';
+import { JsonOptions } from './types';
 import { FastJsonTransform } from '../../utils/fastjson-transform';
 
 export class JsonStrategy implements SerializerStrategy {

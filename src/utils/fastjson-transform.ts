@@ -1,6 +1,6 @@
 import { Transform, TransformOptions } from 'stream';
 import * as stringify from 'fast-json-stringify';
-import { TransformStrategy } from '../strategy';
+import { TransformStrategy } from '../types';
 
 export interface JsonTransformOptions extends TransformOptions {
 	strategy: TransformStrategy;

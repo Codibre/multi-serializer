@@ -1,5 +1,5 @@
 import { Readable } from 'stream';
-import { SerializerStrategy } from '../strategy';
+import { SerializerStrategy } from '../strategy/serializer';
 
 export class Serializer {
 	async serialize<T>(
@@ -33,9 +33,8 @@ export class Serializer {
 		});
 		base.push(data);
 		base.push(null);
-		const resolve = await result;
 
-		return resolve;
+		return result;
 	}
 
 	async deserialize<T>(data: Buffer | string, strategy: SerializerStrategy) {
