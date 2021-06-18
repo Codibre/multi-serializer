@@ -21,7 +21,7 @@ export class ProtobufTransform extends Transform {
 	}
 
 	private deserialize<T>(chunk: Uint8Array): T {
-		return (this.type.decode(chunk) as unknown) as T;
+		return this.type.decode(chunk) as unknown as T;
 	}
 
 	_transform<T>(chunk: T, encode: string, call: CallableFunction) {
