@@ -2,7 +2,6 @@
   "name": "multi-serializer",
   "description": "This project is just a template for creation of new projects",
   "version": "0.0.1",
-  "private": true,
   "author": {
     "name": "Gustavo S. Rodrigues <gustavo.beavis@gmail.com>"
   },
