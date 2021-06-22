@@ -22,7 +22,7 @@ describe('index.ts', () => {
 		expect(read).toMatchObject(req);
 	});
 
-	it('should start json', async () => {
+	it.only('should start json', async () => {
 		const serializer = new Serializer();
 		const proto = new JsonStrategy({
 			schema: {

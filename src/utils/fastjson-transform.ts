@@ -11,6 +11,8 @@ export interface JsonTransformOptions extends TransformOptions {
 export class FastJsonTransform extends Transform {
 	private strategy: TransformStrategy;
 	private exec: CallableFunction;
+	private buff: number[] = [];
+
 	constructor(opts: JsonTransformOptions) {
 		super({ ...opts, objectMode: true });
 		this.strategy = opts.strategy;
@@ -23,8 +25,15 @@ export class FastJsonTransform extends Transform {
 		return this.exec(chunk);
 	}
 
-	private deserialize<T>(chunk: Buffer, encode: BufferEncoding): T {
-		return JSON.parse(chunk.toString(encode)) as T;
+	private deserialize(chunk: Buffer) {
+		if (chunk) {
+			this.buff.push(...chunk);
+		}
+		return chunk;
+	}
+
+	async onEnd<T>(encode: BufferEncoding = 'utf-8') {
+		return JSON.parse(Buffer.from(this.buff).toString(encode)) as T;
 	}
 
 	_transform<T>(chunk: T, encode: string, call: CallableFunction) {

@@ -43,19 +43,21 @@ export class Serializer {
 		});
 
 		const stream = await strategy.deserialize(base);
-		const result: Promise<T> = new Promise((resolve) => {
-			let res = {};
-			stream.on('data', (chunk: T) => {
-				res = { res, ...chunk };
-			});
-			stream.on('end', () => {
-				resolve(res as T);
-			});
-		});
 		base.push(data);
 		base.push(null);
-		const resolve = await result;
-
-		return resolve;
+		return new Promise<T>((resolve) => {
+			let res = {};
+			const listener = stream.onEnd
+				? () => undefined
+				: (chunk: T) => {
+						res = { res, ...chunk };
+				  };
+			stream.on('data', listener);
+			stream.once('end', () => stream.off('data', listener));
+			stream.once('end', () => {
+				const a = stream.onEnd ? stream.onEnd<T>() : (res as T);
+				resolve(a);
+			});
+		});
 	}
 }
