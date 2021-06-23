@@ -7,6 +7,7 @@ import {
 } from '../../../src';
 import { gzip } from 'zlib';
 import { promisify } from 'util';
+import { interval } from '@codibre/fluent-iterable';
 
 const gzipAsync = promisify(gzip);
 
@@ -169,6 +170,18 @@ describe('index.ts', () => {
 		const read = await serializer.deserialize(write);
 
 		expect(read).toMatchObject(req);
+	});
+
+	it('should work with big json', async () => {
+		const target = new Serializer(new JsonStrategy(), new GzipStrategy());
+		const data = interval(0, 300000)
+			.map(() => ({ bar: 'bar', foo: 'foo' }))
+			.toArray();
+
+		const zip = await target.serialize(data);
+		const result = await target.deserialize(zip);
+
+		expect(result).toEqual(data);
 	});
 
 	it('should return undefined when gzip decompressing throws an error', async () => {
