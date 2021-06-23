@@ -4,7 +4,7 @@ import {
 	Serialized,
 	SerializerStrategy,
 } from '../strategy/serializer';
-import { concatStream } from '../utils/concat-stream';
+import { concatStream } from '../utils';
 
 export class Serializer<A> {
 	private readonly chain: ChainSerializerStrategy[];
