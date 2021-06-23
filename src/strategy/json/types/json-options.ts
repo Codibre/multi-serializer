@@ -3,6 +3,6 @@
 import { Schema, Options } from 'fast-json-stringify';
 
 export interface JsonOptions {
-	type?: Schema;
+	schema?: Schema;
 	options?: Options;
 }

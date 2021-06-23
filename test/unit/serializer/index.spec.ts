@@ -30,7 +30,12 @@ describe('index.ts', () => {
 			attribute: 'a.b.Foo',
 			proto: './foo.proto',
 		});
-		const serializer = new Serializer(proto, new GzipStrategy());
+		const serializer = new Serializer(
+			proto,
+			new GzipStrategy({
+				level: 9,
+			}),
+		);
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 
@@ -42,7 +47,7 @@ describe('index.ts', () => {
 			bar: 'abc',
 		};
 		const proto = new JsonStrategy<typeof req>({
-			type: {
+			schema: {
 				title: 'Foo',
 				type: 'object',
 				properties: {
@@ -64,7 +69,7 @@ describe('index.ts', () => {
 			bar: 'abc',
 		};
 		const strategy = new JsonStrategy<typeof req>({
-			type: {
+			schema: {
 				title: 'Foo',
 				type: 'object',
 				properties: {

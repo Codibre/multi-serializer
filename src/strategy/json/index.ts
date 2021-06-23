@@ -9,8 +9,8 @@ export class JsonStrategy<A = any>
 	private exec: CallableFunction;
 
 	constructor(options?: JsonOptions) {
-		this.exec = options?.type
-			? stringify(options.type, options?.options)
+		this.exec = options?.schema
+			? stringify(options.schema, options?.options)
 			: JSON.stringify;
 	}
 
