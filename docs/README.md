@@ -1,6 +1,6 @@
-fluent-iterable - v0.1.0
+fluent-iterable - v0.1.1
 
-# fluent-iterable - v0.1.0
+# fluent-iterable - v0.1.1
 
 ## Table of contents
 
@@ -10,6 +10,7 @@ fluent-iterable - v0.1.0
 - [GzipStrategy](classes/gzipstrategy.md)
 - [JsonStrategy](classes/jsonstrategy.md)
 - [ProtobufStrategy](classes/protobufstrategy.md)
+- [Serializer](classes/serializer.md)
 
 ### Interfaces
 

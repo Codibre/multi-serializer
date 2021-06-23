@@ -1,12 +1,27 @@
-[fluent-iterable - v0.0.1](../README.md) / Serializer
+[fluent-iterable - v0.1.1](../README.md) / Serializer
 
-# Class: Serializer
+# Class: Serializer<MainStrategy, In, FirstOut, Chain, Out\>
+
+## Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `MainStrategy` | `MainStrategy`: [SerializerStrategy](../interfaces/serializerstrategy.md)<any, [Serialized](../README.md#serialized)\> |
+| `In` | `In`: `MainStrategy` extends [SerializerStrategy](../interfaces/serializerstrategy.md)<infer R, any\> ? `R` : `never` |
+| `FirstOut` | `FirstOut`: `MainStrategy` extends [SerializerStrategy](../interfaces/serializerstrategy.md)<any, infer R\> ? `R` : `never` |
+| `Chain` | `Chain`: [ChainSerializerStrategy](../interfaces/chainserializerstrategy.md)[] |
+| `Out` | `Out`: `Chain` extends [...ChainSerializerStrategy[], [SerializerStrategy](../interfaces/serializerstrategy.md)<any, infer R\>] ? `R` extends `Stream` ? [Serialized](../README.md#serialized) : `R` : `FirstOut` |
 
 ## Table of contents
 
 ### Constructors
 
 - [constructor](serializer.md#constructor)
+
+### Properties
+
+- [chain](serializer.md#chain)
+- [lastChain](serializer.md#lastchain)
 
 ### Methods
 
@@ -17,26 +32,54 @@
 
 ### constructor
 
-• **new Serializer**()
-
-## Methods
-
-### deserialize
-
-▸ **deserialize**<T\>(`data`, `strategy`): `Promise`<T\>
+• **new Serializer**<MainStrategy, In, FirstOut, Chain, Out\>(`strategy`, ...`chain`)
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `T` |
+| Name | Type |
+| :------ | :------ |
+| `MainStrategy` | `MainStrategy`: [SerializerStrategy](../interfaces/serializerstrategy.md)<any, [Serialized](../README.md#serialized), MainStrategy\> |
+| `In` | `In`: `any` |
+| `FirstOut` | `FirstOut`: [Serialized](../README.md#serialized) |
+| `Chain` | `Chain`: [ChainSerializerStrategy](../interfaces/chainserializerstrategy.md)<[Serialized](../README.md#serialized) \| Stream\>[] |
+| `Out` | `Out`: [Serialized](../README.md#serialized) |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `data` | `string` \| `Buffer` |
-| `strategy` | `SerializerStrategy` |
+| `strategy` | `MainStrategy` |
+| `...chain` | `Chain` |
+
+## Properties
+
+### chain
+
+• `Private` `Readonly` **chain**: `Chain`
+
+___
+
+### lastChain
+
+• `Private` `Readonly` **lastChain**: `number`
+
+## Methods
+
+### deserialize
+
+▸ **deserialize**<T\>(`data`): `Promise`<T\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | `T`: `any` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | `Out` |
 
 #### Returns
 
@@ -46,21 +89,20 @@ ___
 
 ### serialize
 
-▸ **serialize**<T\>(`data`, `strategy`): `Promise`<string \| Buffer\>
+▸ **serialize**<T\>(`data`): `Promise`<Out\>
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `T` |
+| Name | Type |
+| :------ | :------ |
+| `T` | `T`: `any` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `data` | `T` |
-| `strategy` | `SerializerStrategy` |
 
 #### Returns
 
-`Promise`<string \| Buffer\>
+`Promise`<Out\>

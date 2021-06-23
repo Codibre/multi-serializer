@@ -1,5 +1,8 @@
 
-## 0.1.0
+## 0.1.1
+* b052ce4 fixing serializer exporting
+## v0.1.0
+* 2735b67 0.1.0
 * ba9a5f9 Merge pull request #7 from Codibre/suggestion
 * 4c30434 testing only json + base64
 * 3fcda11 bettering types and creating base 64 strategy
