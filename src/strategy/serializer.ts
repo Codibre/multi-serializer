@@ -14,4 +14,4 @@ export interface SerializerStrategy<I, O extends Serialized | Stream> {
 }
 
 export interface ChainSerializerStrategy
-	extends SerializerStrategy<Serialized | Stream, Stream> {}
+	extends SerializerStrategy<Serialized | Stream, Serialized | Stream> {}
