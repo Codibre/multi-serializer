@@ -1,8 +1,10 @@
-import { Base64Strategy } from '../../../src';
-import { Serializer } from '../../../src/serializer/index';
-import { GzipStrategy } from '../../../src/strategy/gzip';
-import { JsonStrategy } from '../../../src/strategy/json';
-import { ProtobufStrategy } from '../../../src/strategy/protobuf';
+import {
+	Base64Strategy,
+	Serializer,
+	GzipStrategy,
+	JsonStrategy,
+	ProtobufStrategy,
+} from '../../../src';
 describe('index.ts', () => {
 	afterEach(() => {
 		// delete require.cache[require.resolve('../../../src/serializer/index')];
