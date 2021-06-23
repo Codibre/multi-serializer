@@ -13,10 +13,10 @@ describe('index.ts', () => {
 			proto: './foo.proto',
 			gzip: true,
 		});
-		const serializer = new Serializer(proto, new GzipStrategy());
 		const req = {
 			bar: 'abc',
 		};
+		const serializer = new Serializer<typeof req>(proto, new GzipStrategy());
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 
@@ -36,10 +36,10 @@ describe('index.ts', () => {
 			},
 			gzip: true,
 		});
-		const serializer = new Serializer(proto, new GzipStrategy());
 		const req = {
 			bar: 'abc',
 		};
+		const serializer = new Serializer<typeof req>(proto, new GzipStrategy());
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 
