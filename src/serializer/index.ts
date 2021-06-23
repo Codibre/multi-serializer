@@ -4,29 +4,36 @@ import {
 	Serialized,
 	SerializerStrategy,
 } from '../strategy/serializer';
+import { concatStream } from '../utils/concat-stream';
 
 export class Serializer<A> {
-	private readonly strategies: SerializerStrategy<any, Serialized>[];
+	private readonly chain: ChainSerializerStrategy[];
+	private readonly lastChain: number;
 	constructor(
-		strategy: SerializerStrategy<A, Serialized>,
-		...strategies: ChainSerializerStrategy[]
+		private strategy: SerializerStrategy<A, Serialized>,
+		...chain: ChainSerializerStrategy[]
 	) {
-		this.strategies = [strategy, ...strategies];
+		this.chain = chain;
+		this.lastChain = chain.length - 1;
 	}
 
 	async serialize<T extends A>(data: T): Promise<Serialized> {
-		let result: any = data;
-		for (let i = 0; i < this.strategies.length; i++) {
-			result = await this.strategies[i].serialize(result);
+		let result: any = await this.strategy.serialize(data);
+
+		if (this.lastChain >= 0) {
+			for (let i = 0; i <= this.lastChain; i++) {
+				result = await this.chain[i].serialize(result);
+			}
 		}
-		return result;
+		return concatStream(result);
 	}
 
 	async deserialize<T extends A>(data: Serialized): Promise<T> {
 		let result: any = data;
-		for (let i = this.strategies.length - 1; i >= 0; i--) {
-			result = await this.strategies[i].deserialize(result);
+		for (let i = this.lastChain; i >= 0; i--) {
+			result = await this.chain[i].deserialize(result);
 		}
-		return result;
+		result = await concatStream(result);
+		return this.strategy.deserialize(result) as T;
 	}
 }

@@ -103,8 +103,27 @@ describe('index.ts', () => {
 		const req = {
 			bar: 'abc',
 		};
-		const strategy = new JsonStrategy<typeof req>();
+		const strategy = new JsonStrategy<typeof req>({});
 		const serializer = new Serializer(strategy, new GzipStrategy());
+
+		const write = await serializer.serialize(req);
+		const read = await serializer.deserialize(write);
+
+		expect(read).toMatchObject(req);
+	});
+
+	it('should work with json + gzip + gzip', async () => {
+		const req = {
+			bar: 'abc',
+		};
+		const strategy = new JsonStrategy<typeof req>();
+		const serializer = new Serializer(
+			strategy,
+			new GzipStrategy(),
+			new GzipStrategy({
+				level: 9,
+			}),
+		);
 
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);

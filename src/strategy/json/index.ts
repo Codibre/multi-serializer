@@ -10,7 +10,7 @@ export class JsonStrategy<A = any>
 
 	constructor(options?: JsonOptions) {
 		this.exec = options?.schema
-			? stringify(options.schema, options?.options)
+			? stringify(options.schema, options.options)
 			: JSON.stringify;
 	}
 

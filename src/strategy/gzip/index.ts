@@ -1,18 +1,28 @@
 import { ChainSerializerStrategy, Serialized } from '../serializer';
-import { gzip, gunzip, ZlibOptions } from 'zlib';
-import { promisify } from 'util';
-
-const gzipAsync = promisify(gzip);
-const gunzipAsync = promisify(gunzip);
+import { ZlibOptions, createGzip, createGunzip } from 'zlib';
+import { Stream } from 'stream';
+import { isStream } from '../../utils';
 
 export class GzipStrategy implements ChainSerializerStrategy {
 	constructor(private options?: ZlibOptions) {}
 
-	async serialize(content: Serialized): Promise<Serialized> {
-		return gzipAsync(content, this.options);
+	async serialize(content: Serialized | Stream): Promise<Stream> {
+		const gzip = createGzip(this.options);
+		if (isStream(content)) {
+			return content.pipe(gzip);
+		}
+		gzip.write(content);
+		gzip.end();
+		return gzip;
 	}
 
-	async deserialize(content: Serialized): Promise<Serialized> {
-		return gunzipAsync(content, this.options);
+	async deserialize(content: Serialized | Stream): Promise<Stream> {
+		const gzip = createGunzip(this.options);
+		if (isStream(content)) {
+			return content.pipe(gzip);
+		}
+		gzip.write(content);
+		gzip.end();
+		return gzip;
 	}
 }

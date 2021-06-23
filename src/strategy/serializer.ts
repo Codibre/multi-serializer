@@ -8,10 +8,10 @@ export interface StrategyStream extends Stream {
 
 export type Serialized = string | ArrayBuffer | Uint8Array;
 
-export interface SerializerStrategy<I, O extends Serialized> {
+export interface SerializerStrategy<I, O extends Serialized | Stream> {
 	serialize(content: I): Promise<O> | O;
 	deserialize(content: O): Promise<I> | I;
 }
 
 export interface ChainSerializerStrategy
-	extends SerializerStrategy<Serialized, Serialized> {}
+	extends SerializerStrategy<Serialized | Stream, Stream> {}
