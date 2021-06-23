@@ -12,11 +12,12 @@ describe('index.ts', () => {
 		const req = {
 			bar: 'abc',
 		};
-		const proto = new ProtobufStrategy<typeof req>({
-			attribute: 'a.b.Foo',
-			proto: './foo.proto',
-		});
-		const serializer = new Serializer(proto);
+		const serializer = new Serializer(
+			new ProtobufStrategy<typeof req>({
+				attribute: 'a.b.Foo',
+				proto: './foo.proto',
+			}),
+		);
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 
@@ -27,12 +28,11 @@ describe('index.ts', () => {
 		const req = {
 			bar: 'abc',
 		};
-		const proto = new ProtobufStrategy({
-			attribute: 'a.b.Foo',
-			proto: './foo.proto',
-		});
 		const serializer = new Serializer(
-			proto,
+			new ProtobufStrategy({
+				attribute: 'a.b.Foo',
+				proto: './foo.proto',
+			}),
 			new GzipStrategy({
 				level: 9,
 			}),
@@ -47,18 +47,19 @@ describe('index.ts', () => {
 		const req = {
 			bar: 'abc',
 		};
-		const proto = new JsonStrategy<typeof req>({
-			schema: {
-				title: 'Foo',
-				type: 'object',
-				properties: {
-					bar: {
-						type: 'string',
+		const serializer = new Serializer(
+			new JsonStrategy<typeof req>({
+				schema: {
+					title: 'Foo',
+					type: 'object',
+					properties: {
+						bar: {
+							type: 'string',
+						},
 					},
 				},
-			},
-		});
-		const serializer = new Serializer(proto);
+			}),
+		);
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 
@@ -69,18 +70,20 @@ describe('index.ts', () => {
 		const req = {
 			bar: 'abc',
 		};
-		const strategy = new JsonStrategy<typeof req>({
-			schema: {
-				title: 'Foo',
-				type: 'object',
-				properties: {
-					bar: {
-						type: 'string',
+		const serializer = new Serializer(
+			new JsonStrategy<typeof req>({
+				schema: {
+					title: 'Foo',
+					type: 'object',
+					properties: {
+						bar: {
+							type: 'string',
+						},
 					},
 				},
-			},
-		});
-		const serializer = new Serializer(strategy, new GzipStrategy());
+			}),
+			new GzipStrategy(),
+		);
 
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
@@ -104,8 +107,10 @@ describe('index.ts', () => {
 		const req = {
 			bar: 'abc',
 		};
-		const strategy = new JsonStrategy<typeof req>({});
-		const serializer = new Serializer(strategy, new GzipStrategy());
+		const serializer = new Serializer(
+			new JsonStrategy<typeof req>({}),
+			new GzipStrategy(),
+		);
 
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
@@ -117,9 +122,8 @@ describe('index.ts', () => {
 		const req = {
 			bar: 'abc',
 		};
-		const strategy = new JsonStrategy();
 		const serializer = new Serializer(
-			strategy,
+			new JsonStrategy(),
 			new GzipStrategy(),
 			new GzipStrategy({
 				level: 9,
@@ -136,12 +140,23 @@ describe('index.ts', () => {
 		const req = {
 			bar: 'abc',
 		};
-		const strategy = new JsonStrategy();
 		const serializer = new Serializer(
-			strategy,
+			new JsonStrategy(),
 			new GzipStrategy(),
 			new Base64Strategy(),
 		);
+
+		const write = await serializer.serialize(req);
+		const read = await serializer.deserialize(write);
+
+		expect(read).toMatchObject(req);
+	});
+
+	it('should work with json + base64', async () => {
+		const req = {
+			bar: 'abc',
+		};
+		const serializer = new Serializer(new JsonStrategy(), new Base64Strategy());
 
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
