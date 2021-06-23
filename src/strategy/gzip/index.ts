@@ -3,7 +3,7 @@ import { ZlibOptions, createGzip, createGunzip } from 'zlib';
 import { Stream } from 'stream';
 import { isStream } from '../../utils';
 
-export class GzipStrategy implements ChainSerializerStrategy {
+export class GzipStrategy implements ChainSerializerStrategy<Stream> {
 	constructor(private options?: ZlibOptions) {}
 
 	async serialize(content: Serialized | Stream): Promise<Stream> {

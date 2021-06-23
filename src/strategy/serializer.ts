@@ -13,5 +13,6 @@ export interface SerializerStrategy<I, O extends Serialized | Stream> {
 	deserialize(content: O): Promise<I> | I;
 }
 
-export interface ChainSerializerStrategy
-	extends SerializerStrategy<Serialized | Stream, Serialized | Stream> {}
+export interface ChainSerializerStrategy<
+	O extends Serialized | Stream = Serialized | Stream,
+> extends SerializerStrategy<Serialized | Stream, O> {}

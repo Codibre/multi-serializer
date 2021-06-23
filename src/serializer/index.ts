@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Stream } from 'stream';
 import {
 	ChainSerializerStrategy,
 	Serialized,
@@ -6,18 +7,30 @@ import {
 } from '../strategy/serializer';
 import { concatStream } from '../utils';
 
-export class Serializer<A> {
-	private readonly chain: ChainSerializerStrategy[];
+export class Serializer<
+	MainStrategy extends SerializerStrategy<any, Serialized>,
+	In extends MainStrategy extends SerializerStrategy<infer R, any> ? R : never,
+	FirstOut extends MainStrategy extends SerializerStrategy<any, infer R>
+		? R
+		: never,
+	Chain extends ChainSerializerStrategy[],
+	Out extends Chain extends [
+		...ChainSerializerStrategy[],
+		SerializerStrategy<any, infer R>,
+	]
+		? R extends Stream
+			? Serialized
+			: R
+		: FirstOut,
+> {
+	private readonly chain: Chain;
 	private readonly lastChain: number;
-	constructor(
-		private strategy: SerializerStrategy<A, Serialized>,
-		...chain: ChainSerializerStrategy[]
-	) {
+	constructor(private strategy: MainStrategy, ...chain: Chain) {
 		this.chain = chain;
 		this.lastChain = chain.length - 1;
 	}
 
-	async serialize<T extends A>(data: T): Promise<Serialized> {
+	async serialize<T extends In>(data: T): Promise<Out> {
 		let result: any = await this.strategy.serialize(data);
 
 		if (this.lastChain >= 0) {
@@ -25,10 +38,10 @@ export class Serializer<A> {
 				result = await this.chain[i].serialize(result);
 			}
 		}
-		return concatStream(result);
+		return concatStream(result) as Out;
 	}
 
-	async deserialize<T extends A>(data: Serialized): Promise<T> {
+	async deserialize<T extends In>(data: Out): Promise<T> {
 		let result: any = data;
 		for (let i = this.lastChain; i >= 0; i--) {
 			result = await this.chain[i].deserialize(result);

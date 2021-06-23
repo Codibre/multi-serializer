@@ -1,3 +1,4 @@
+import { Base64Strategy } from '../../../src';
 import { Serializer } from '../../../src/serializer/index';
 import { GzipStrategy } from '../../../src/strategy/gzip';
 import { JsonStrategy } from '../../../src/strategy/json';
@@ -123,6 +124,23 @@ describe('index.ts', () => {
 			new GzipStrategy({
 				level: 9,
 			}),
+		);
+
+		const write = await serializer.serialize(req);
+		const read = await serializer.deserialize(write);
+
+		expect(read).toMatchObject(req);
+	});
+
+	it('should work with json + gzip + base64', async () => {
+		const req = {
+			bar: 'abc',
+		};
+		const strategy = new JsonStrategy();
+		const serializer = new Serializer(
+			strategy,
+			new GzipStrategy(),
+			new Base64Strategy(),
 		);
 
 		const write = await serializer.serialize(req);
