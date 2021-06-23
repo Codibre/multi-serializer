@@ -1,5 +1,10 @@
 
-## 0.1.1
+## 0.1.2
+* 5ddfbfe Merge pull request #8 from Codibre/safe-code
+* f7e2217 catching possible error to avoid untreatable exception
+* 6825521 catching possible error to avoid untreatable exception
+## v0.1.1
+* 91b88ac 0.1.1
 * b052ce4 fixing serializer exporting
 ## v0.1.0
 * 2735b67 0.1.0
