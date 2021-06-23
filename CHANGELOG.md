@@ -1,5 +1,11 @@
 
-## 0.1.2
+## 0.1.3
+* 6007b76 Merge pull request #9 from Codibre/fixing-concat
+* d8dee4a fixing test description
+* 3c11101 testing big json serializing and deserializing with gzip
+* 86cee31 Fixing on error listener on concat
+## v0.1.2
+* 76f1840 0.1.2
 * 5ddfbfe Merge pull request #8 from Codibre/safe-code
 * f7e2217 catching possible error to avoid untreatable exception
 * 6825521 catching possible error to avoid untreatable exception
