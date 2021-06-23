@@ -1,1 +1,3 @@
-export { ProtobufOptions } from './protobuf-options';
+/* istanbul ignore file */
+
+export * from './proto-buf-options';

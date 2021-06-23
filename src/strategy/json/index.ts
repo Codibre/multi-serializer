@@ -1,46 +1,31 @@
-import { Stream } from 'stream';
-import { TransformStrategy } from '../../types';
-import { SerializerStrategy } from '../serializer';
-import { createGunzip, createGzip } from 'zlib';
+import { Serialized, SerializerStrategy } from '../serializer';
 import { JsonOptions } from './types';
-import { FastJsonTransform } from '../../utils/fastjson-transform';
+import * as stringify from 'fast-json-stringify';
 
-export class JsonStrategy implements SerializerStrategy {
-	private options!: JsonOptions;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export class JsonStrategy<A = any>
+	implements SerializerStrategy<A, Serialized>
+{
+	private exec: CallableFunction;
 
-	constructor(options: JsonOptions) {
-		this.options = options;
+	constructor(options?: JsonOptions) {
+		this.exec = options?.schema
+			? stringify(options.schema, options.options)
+			: JSON.stringify;
 	}
 
-	async serialize(content: Stream): Promise<Stream> {
-		const transform = new FastJsonTransform({
-			...this.options,
-			strategy: TransformStrategy.SERIALIZE,
-		});
-		content.pipe(transform);
-
-		if (this.options.gzip) {
-			const gz = createGzip();
-			transform.pipe(gz);
-			return gz;
-		}
-
-		return transform;
+	async serialize<T extends A>(content: T): Promise<Serialized> {
+		return this.exec(content);
 	}
 
-	async deserialize(content: Stream): Promise<Stream> {
-		const transform = new FastJsonTransform({
-			...this.options,
-			strategy: TransformStrategy.DESERIALIZE,
-		});
-
-		if (!this.options.gzip) {
-			return content.pipe(transform);
-		}
-		const unzip = createGunzip();
-		content.pipe(unzip);
-		unzip.pipe(transform);
-
-		return transform;
+	async deserialize<T extends A>(
+		content: Serialized,
+		encode: BufferEncoding = 'utf-8',
+	): Promise<T> {
+		return JSON.parse(
+			typeof content === 'string'
+				? content
+				: Buffer.from(content).toString(encode),
+		);
 	}
 }

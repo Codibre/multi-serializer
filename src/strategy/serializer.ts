@@ -1,17 +1,18 @@
+/* istanbul ignore file */
+
 import { Stream } from 'stream';
-import { StrategyOptions } from '../types';
 
 export interface StrategyStream extends Stream {
 	onEnd?<T>(encode?: BufferEncoding): T;
 }
 
-export interface SerializerStrategy {
-	serialize(
-		content: Stream,
-		options?: StrategyOptions,
-	): Promise<Stream> | Stream;
-	deserialize(
-		content: Stream,
-		options?: StrategyOptions,
-	): Promise<StrategyStream> | StrategyStream;
+export type Serialized = string | ArrayBuffer | Uint8Array;
+
+export interface SerializerStrategy<I, O extends Serialized | Stream> {
+	serialize(content: I): Promise<O> | O;
+	deserialize(content: O): Promise<I> | I;
 }
+
+export interface ChainSerializerStrategy<
+	O extends Serialized | Stream = Serialized | Stream,
+> extends SerializerStrategy<Serialized | Stream, O> {}

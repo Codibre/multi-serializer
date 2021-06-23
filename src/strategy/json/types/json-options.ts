@@ -1,7 +1,8 @@
-import { Schema, Options } from 'fast-json-stringify';
-import { StrategyOptions } from '../../../types';
+/* istanbul ignore file */
 
-export interface JsonOptions extends StrategyOptions {
+import { Schema, Options } from 'fast-json-stringify';
+
+export interface JsonOptions {
 	schema?: Schema;
 	options?: Options;
 }

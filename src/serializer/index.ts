@@ -1,63 +1,52 @@
-import { Readable } from 'stream';
-import { SerializerStrategy } from '../strategy/serializer';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Stream } from 'stream';
+import {
+	ChainSerializerStrategy,
+	Serialized,
+	SerializerStrategy,
+} from '../strategy/serializer';
+import { concatStream } from '../utils';
 
-export class Serializer {
-	async serialize<T>(
-		data: T,
-		strategy: SerializerStrategy,
-	): Promise<Buffer | string> {
-		const base: Readable = new Readable({
-			objectMode: true,
-		});
-
-		let isBuffer = false;
-		let isFirst = true;
-
-		const stream = await strategy.serialize(base);
-
-		const result: Promise<string | Buffer> = new Promise((resolve) => {
-			const res: Array<string> | Array<Buffer | string> = [];
-			stream.on('data', (chunk) => {
-				if (isFirst) {
-					isFirst = false;
-					isBuffer = Buffer.isBuffer(chunk);
-				}
-				res.push(chunk);
-			});
-			stream.on('end', () => {
-				if (isBuffer) {
-					resolve(Buffer.concat(res as Buffer[]));
-				}
-				resolve(res[0]); // because if is string is only one;
-			});
-		});
-		base.push(data);
-		base.push(null);
-
-		return result;
+export class Serializer<
+	MainStrategy extends SerializerStrategy<any, Serialized>,
+	In extends MainStrategy extends SerializerStrategy<infer R, any> ? R : never,
+	FirstOut extends MainStrategy extends SerializerStrategy<any, infer R>
+		? R
+		: never,
+	Chain extends ChainSerializerStrategy[],
+	Out extends Chain extends [
+		...ChainSerializerStrategy[],
+		SerializerStrategy<any, infer R>,
+	]
+		? R extends Stream
+			? Serialized
+			: R
+		: FirstOut,
+> {
+	private readonly chain: Chain;
+	private readonly lastChain: number;
+	constructor(private strategy: MainStrategy, ...chain: Chain) {
+		this.chain = chain;
+		this.lastChain = chain.length - 1;
 	}
 
-	async deserialize<T>(data: Buffer | string, strategy: SerializerStrategy) {
-		const base: Readable = new Readable({
-			objectMode: true,
-		});
+	async serialize<T extends In>(data: T): Promise<Out> {
+		let result: any = await this.strategy.serialize(data);
 
-		const stream = await strategy.deserialize(base);
-		base.push(data);
-		base.push(null);
-		return new Promise<T>((resolve) => {
-			let res = {};
-			const listener = stream.onEnd
-				? () => undefined
-				: (chunk: T) => {
-						res = { res, ...chunk };
-				  };
-			stream.on('data', listener);
-			stream.once('end', () => stream.off('data', listener));
-			stream.once('end', () => {
-				const a = stream.onEnd ? stream.onEnd<T>() : (res as T);
-				resolve(a);
-			});
-		});
+		if (this.lastChain >= 0) {
+			for (let i = 0; i <= this.lastChain; i++) {
+				result = await this.chain[i].serialize(result);
+			}
+		}
+		return concatStream(result) as Out;
+	}
+
+	async deserialize<T extends In>(data: Out): Promise<T> {
+		let result: any = data;
+		for (let i = this.lastChain; i >= 0; i--) {
+			result = await this.chain[i].deserialize(result);
+		}
+		result = await concatStream(result);
+		return this.strategy.deserialize(result) as T;
 	}
 }

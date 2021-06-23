@@ -1,4 +1,6 @@
+import { Base64Strategy } from '../../../src';
 import { Serializer } from '../../../src/serializer/index';
+import { GzipStrategy } from '../../../src/strategy/gzip';
 import { JsonStrategy } from '../../../src/strategy/json';
 import { ProtobufStrategy } from '../../../src/strategy/protobuf';
 describe('index.ts', () => {
@@ -6,41 +8,158 @@ describe('index.ts', () => {
 		// delete require.cache[require.resolve('../../../src/serializer/index')];
 	});
 
-	it('should start proto', async () => {
-		const serializer = new Serializer();
-		const proto = new ProtobufStrategy({
-			attribute: 'a.b.Foo',
-			proto: './foo.proto',
-			gzip: true,
-		});
+	it('should work with proto', async () => {
 		const req = {
 			bar: 'abc',
 		};
-		const write = await serializer.serialize(req, proto);
-		const read = await serializer.deserialize(write, proto);
+		const serializer = new Serializer(
+			new ProtobufStrategy<typeof req>({
+				attribute: 'a.b.Foo',
+				proto: './foo.proto',
+			}),
+		);
+		const write = await serializer.serialize(req);
+		const read = await serializer.deserialize(write);
 
 		expect(read).toMatchObject(req);
 	});
 
-	it.only('should start json', async () => {
-		const serializer = new Serializer();
-		const proto = new JsonStrategy({
-			schema: {
-				title: 'Foo',
-				type: 'object',
-				properties: {
-					bar: {
-						type: 'string',
-					},
-				},
-			},
-			gzip: true,
-		});
+	it('should work with proto + gzip', async () => {
 		const req = {
 			bar: 'abc',
 		};
-		const write = await serializer.serialize(req, proto);
-		const read = await serializer.deserialize(write, proto);
+		const serializer = new Serializer(
+			new ProtobufStrategy({
+				attribute: 'a.b.Foo',
+				proto: './foo.proto',
+			}),
+			new GzipStrategy({
+				level: 9,
+			}),
+		);
+		const write = await serializer.serialize(req);
+		const read = await serializer.deserialize(write);
+
+		expect(read).toMatchObject(req);
+	});
+
+	it('should work with fast json', async () => {
+		const req = {
+			bar: 'abc',
+		};
+		const serializer = new Serializer(
+			new JsonStrategy<typeof req>({
+				schema: {
+					title: 'Foo',
+					type: 'object',
+					properties: {
+						bar: {
+							type: 'string',
+						},
+					},
+				},
+			}),
+		);
+		const write = await serializer.serialize(req);
+		const read = await serializer.deserialize(write);
+
+		expect(read).toMatchObject(req);
+	});
+
+	it('should work with fast json + gzip', async () => {
+		const req = {
+			bar: 'abc',
+		};
+		const serializer = new Serializer(
+			new JsonStrategy<typeof req>({
+				schema: {
+					title: 'Foo',
+					type: 'object',
+					properties: {
+						bar: {
+							type: 'string',
+						},
+					},
+				},
+			}),
+			new GzipStrategy(),
+		);
+
+		const write = await serializer.serialize(req);
+		const read = await serializer.deserialize(write);
+
+		expect(read).toMatchObject(req);
+	});
+
+	it('should work with json', async () => {
+		const req = {
+			bar: 'abc',
+		};
+		const proto = new JsonStrategy<typeof req>();
+		const serializer = new Serializer(proto);
+		const write = await serializer.serialize(req);
+		const read = await serializer.deserialize(write);
+
+		expect(read).toMatchObject(req);
+	});
+
+	it('should work with json + gzip', async () => {
+		const req = {
+			bar: 'abc',
+		};
+		const serializer = new Serializer(
+			new JsonStrategy<typeof req>({}),
+			new GzipStrategy(),
+		);
+
+		const write = await serializer.serialize(req);
+		const read = await serializer.deserialize(write);
+
+		expect(read).toMatchObject(req);
+	});
+
+	it('should work with json + gzip + gzip', async () => {
+		const req = {
+			bar: 'abc',
+		};
+		const serializer = new Serializer(
+			new JsonStrategy(),
+			new GzipStrategy(),
+			new GzipStrategy({
+				level: 9,
+			}),
+		);
+
+		const write = await serializer.serialize(req);
+		const read = await serializer.deserialize(write);
+
+		expect(read).toMatchObject(req);
+	});
+
+	it('should work with json + gzip + base64', async () => {
+		const req = {
+			bar: 'abc',
+		};
+		const serializer = new Serializer(
+			new JsonStrategy(),
+			new GzipStrategy(),
+			new Base64Strategy(),
+		);
+
+		const write = await serializer.serialize(req);
+		const read = await serializer.deserialize(write);
+
+		expect(read).toMatchObject(req);
+	});
+
+	it('should work with json + base64', async () => {
+		const req = {
+			bar: 'abc',
+		};
+		const serializer = new Serializer(new JsonStrategy(), new Base64Strategy());
+
+		const write = await serializer.serialize(req);
+		const read = await serializer.deserialize(write);
 
 		expect(read).toMatchObject(req);
 	});
