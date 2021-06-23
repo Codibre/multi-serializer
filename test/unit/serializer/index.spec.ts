@@ -172,7 +172,7 @@ describe('index.ts', () => {
 		expect(read).toMatchObject(req);
 	});
 
-	it('should work with big json', async () => {
+	it('should work with big json with gzip', async () => {
 		const target = new Serializer(new JsonStrategy(), new GzipStrategy());
 		const data = interval(0, 300000)
 			.map(() => ({ bar: 'bar', foo: 'foo' }))
