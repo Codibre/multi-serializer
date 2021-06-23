@@ -5,6 +5,11 @@ import {
 	JsonStrategy,
 	ProtobufStrategy,
 } from '../../../src';
+import { gzip } from 'zlib';
+import { promisify } from 'util';
+
+const gzipAsync = promisify(gzip);
+
 describe('index.ts', () => {
 	afterEach(() => {
 		// delete require.cache[require.resolve('../../../src/serializer/index')];
@@ -164,5 +169,31 @@ describe('index.ts', () => {
 		const read = await serializer.deserialize(write);
 
 		expect(read).toMatchObject(req);
+	});
+
+	it('should return undefined when gzip decompressing throws an error', async () => {
+		const target = new Serializer(new JsonStrategy(), new GzipStrategy());
+		let err: any;
+
+		try {
+			await target.deserialize(Buffer.from('dfklsjflsdlfkjslkjfls'));
+		} catch (error) {
+			err = error;
+		}
+
+		expect(err).not.toBeUndefined();
+	});
+
+	it('should return undefined when JSON.parse throws an error', async () => {
+		const target = new Serializer(new JsonStrategy(), new GzipStrategy());
+		let err: any;
+
+		try {
+			await target.deserialize(await gzipAsync('dfklsjflsdlfkjslkjfls'));
+		} catch (error) {
+			err = error;
+		}
+
+		expect(err).not.toBeUndefined();
 	});
 });
