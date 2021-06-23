@@ -11,7 +11,11 @@ export function concatStream(result: Stream | Serialized) {
 				});
 				result.once('err', reject);
 				result.once('end', () => {
-					resolve(Buffer.concat(res as Buffer[]));
+					try {
+						resolve(Buffer.concat(res as Buffer[]));
+					} catch (err) {
+						reject(err);
+					}
 				});
 		  })
 		: result;
