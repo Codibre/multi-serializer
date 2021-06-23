@@ -7,24 +7,41 @@ describe('index.ts', () => {
 		// delete require.cache[require.resolve('../../../src/serializer/index')];
 	});
 
-	it('should start proto', async () => {
-		const proto = new ProtobufStrategy({
-			attribute: 'a.b.Foo',
-			proto: './foo.proto',
-			gzip: true,
-		});
+	it('should work with proto', async () => {
 		const req = {
 			bar: 'abc',
 		};
-		const serializer = new Serializer<typeof req>(proto, new GzipStrategy());
+		const proto = new ProtobufStrategy<typeof req>({
+			attribute: 'a.b.Foo',
+			proto: './foo.proto',
+		});
+		const serializer = new Serializer(proto);
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 
 		expect(read).toMatchObject(req);
 	});
 
-	it('should start json', async () => {
-		const proto = new JsonStrategy({
+	it('should work with proto + gzip', async () => {
+		const req = {
+			bar: 'abc',
+		};
+		const proto = new ProtobufStrategy<typeof req>({
+			attribute: 'a.b.Foo',
+			proto: './foo.proto',
+		});
+		const serializer = new Serializer(proto, new GzipStrategy());
+		const write = await serializer.serialize(req);
+		const read = await serializer.deserialize(write);
+
+		expect(read).toMatchObject(req);
+	});
+
+	it('should work with fast json', async () => {
+		const req = {
+			bar: 'abc',
+		};
+		const proto = new JsonStrategy<typeof req>({
 			type: {
 				title: 'Foo',
 				type: 'object',
@@ -34,12 +51,56 @@ describe('index.ts', () => {
 					},
 				},
 			},
-			gzip: true,
 		});
+		const serializer = new Serializer(proto);
+		const write = await serializer.serialize(req);
+		const read = await serializer.deserialize(write);
+
+		expect(read).toMatchObject(req);
+	});
+
+	it('should work with fast json + gzip', async () => {
 		const req = {
 			bar: 'abc',
 		};
-		const serializer = new Serializer<typeof req>(proto, new GzipStrategy());
+		const strategy = new JsonStrategy<typeof req>({
+			type: {
+				title: 'Foo',
+				type: 'object',
+				properties: {
+					bar: {
+						type: 'string',
+					},
+				},
+			},
+		});
+		const serializer = new Serializer(strategy, new GzipStrategy());
+
+		const write = await serializer.serialize(req);
+		const read = await serializer.deserialize(write);
+
+		expect(read).toMatchObject(req);
+	});
+
+	it('should work with json', async () => {
+		const req = {
+			bar: 'abc',
+		};
+		const proto = new JsonStrategy<typeof req>();
+		const serializer = new Serializer(proto);
+		const write = await serializer.serialize(req);
+		const read = await serializer.deserialize(write);
+
+		expect(read).toMatchObject(req);
+	});
+
+	it('should work with json + gzip', async () => {
+		const req = {
+			bar: 'abc',
+		};
+		const strategy = new JsonStrategy<typeof req>();
+		const serializer = new Serializer(strategy, new GzipStrategy());
+
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 

@@ -1,11 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Serialized, SerializerStrategy } from '../strategy/serializer';
+import {
+	ChainSerializerStrategy,
+	Serialized,
+	SerializerStrategy,
+} from '../strategy/serializer';
 
 export class Serializer<A> {
 	private readonly strategies: SerializerStrategy<any, Serialized>[];
 	constructor(
 		strategy: SerializerStrategy<A, Serialized>,
-		...strategies: SerializerStrategy<any, Serialized>[]
+		...strategies: ChainSerializerStrategy[]
 	) {
 		this.strategies = [strategy, ...strategies];
 	}

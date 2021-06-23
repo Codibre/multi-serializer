@@ -1,6 +1,6 @@
-import { StrategyOptions } from '../../../types';
+/* istanbul ignore file */
 
-export interface ProtobufOptions extends StrategyOptions {
+export interface ProtobufOptions {
 	proto: string | string[];
 	attribute: string;
 }

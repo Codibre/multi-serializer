@@ -8,19 +8,16 @@ export class ProtobufStrategy<A = any>
 {
 	private type: Promise<Type>;
 
-	constructor(private options: ProtobufOptions) {
+	constructor(options: ProtobufOptions) {
 		this.type = this.load(options);
 	}
 
 	private async load(options: ProtobufOptions): Promise<Type> {
-		const type: Type | undefined = await new Promise(async (resolve) => {
-			load(options.proto, (err: Error | null, root?: Root) => {
-				if (err) {
-					throw err;
-				}
-				resolve(root?.lookupType(options.attribute));
-			});
-		});
+		const type: Type | undefined = await new Promise(async (resolve, reject) =>
+			load(options.proto, (err: Error | null, root?: Root) =>
+				err ? reject(err) : resolve(root?.lookupType(options.attribute)),
+			),
+		);
 
 		if (!type) {
 			throw new Error('invalid type');
@@ -32,7 +29,7 @@ export class ProtobufStrategy<A = any>
 		return (await this.type).encode(content).finish() || content;
 	}
 
-	async deserialize<T>(content: Uint8Array): Promise<T> {
+	async deserialize<T extends A>(content: Uint8Array): Promise<T> {
 		return (await this.type).decode(content) as unknown as T;
 	}
 }

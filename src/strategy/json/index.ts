@@ -3,7 +3,9 @@ import { JsonOptions } from './types';
 import * as stringify from 'fast-json-stringify';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export class JsonStrategy implements SerializerStrategy<any, Serialized> {
+export class JsonStrategy<A = any>
+	implements SerializerStrategy<A, Serialized>
+{
 	private exec: CallableFunction;
 
 	constructor(options?: JsonOptions) {
@@ -12,11 +14,11 @@ export class JsonStrategy implements SerializerStrategy<any, Serialized> {
 			: JSON.stringify;
 	}
 
-	async serialize<T>(content: T): Promise<Serialized> {
+	async serialize<T extends A>(content: T): Promise<Serialized> {
 		return this.exec(content);
 	}
 
-	async deserialize<T>(
+	async deserialize<T extends A>(
 		content: Serialized,
 		encode: BufferEncoding = 'utf-8',
 	): Promise<T> {

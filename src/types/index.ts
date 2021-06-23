@@ -1,2 +1,2 @@
-export { StrategyOptions } from './strategy-options';
+/* istanbul ignore file */
 export { TransformStrategy } from './transform-strategy';
