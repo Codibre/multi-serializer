@@ -26,7 +26,7 @@ describe('index.ts', () => {
 		const req = {
 			bar: 'abc',
 		};
-		const proto = new ProtobufStrategy<typeof req>({
+		const proto = new ProtobufStrategy({
 			attribute: 'a.b.Foo',
 			proto: './foo.proto',
 		});
@@ -116,7 +116,7 @@ describe('index.ts', () => {
 		const req = {
 			bar: 'abc',
 		};
-		const strategy = new JsonStrategy<typeof req>();
+		const strategy = new JsonStrategy();
 		const serializer = new Serializer(
 			strategy,
 			new GzipStrategy(),
