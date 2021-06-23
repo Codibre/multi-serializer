@@ -1,10 +1,16 @@
-[fluent-iterable - v0.0.1](../README.md) / JsonStrategy
+[fluent-iterable - v0.1.0](../README.md) / JsonStrategy
 
-# Class: JsonStrategy
+# Class: JsonStrategy<A\>
+
+## Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `A` | `A` = `any` |
 
 ## Implements
 
-- `SerializerStrategy`
+- [SerializerStrategy](../interfaces/serializerstrategy.md)<A, [Serialized](../README.md#serialized)\>
 
 ## Table of contents
 
@@ -14,7 +20,7 @@
 
 ### Properties
 
-- [options](jsonstrategy.md#options)
+- [exec](jsonstrategy.md#exec)
 
 ### Methods
 
@@ -25,56 +31,75 @@
 
 ### constructor
 
-• **new JsonStrategy**(`options`)
+• **new JsonStrategy**<A\>(`options?`)
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `A` | `A` = `any` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `options` | `JsonOptions` |
+| `options?` | `JsonOptions` |
 
 ## Properties
 
-### options
+### exec
 
-• `Private` **options**: `JsonOptions`
+• `Private` **exec**: `CallableFunction`
 
 ## Methods
 
 ### deserialize
 
-▸ **deserialize**(`content`): `Promise`<Stream\>
+▸ **deserialize**<T\>(`content`, `encode?`): `Promise`<T\>
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `content` | `Stream` |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `content` | [Serialized](../README.md#serialized) | `undefined` |
+| `encode` | `BufferEncoding` | 'utf-8' |
 
 #### Returns
 
-`Promise`<Stream\>
+`Promise`<T\>
 
 #### Implementation of
 
-SerializerStrategy.deserialize
+[SerializerStrategy](../interfaces/serializerstrategy.md).[deserialize](../interfaces/serializerstrategy.md#deserialize)
 
 ___
 
 ### serialize
 
-▸ **serialize**(`content`): `Promise`<Stream\>
+▸ **serialize**<T\>(`content`): `Promise`<[Serialized](../README.md#serialized)\>
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `content` | `Stream` |
+| `content` | `T` |
 
 #### Returns
 
-`Promise`<Stream\>
+`Promise`<[Serialized](../README.md#serialized)\>
 
 #### Implementation of
 
-SerializerStrategy.serialize
+[SerializerStrategy](../interfaces/serializerstrategy.md).[serialize](../interfaces/serializerstrategy.md#serialize)

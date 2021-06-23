@@ -1,10 +1,16 @@
-[fluent-iterable - v0.0.1](../README.md) / ProtobufStrategy
+[fluent-iterable - v0.1.0](../README.md) / ProtobufStrategy
 
-# Class: ProtobufStrategy
+# Class: ProtobufStrategy<A\>
+
+## Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `A` | `A` = `any` |
 
 ## Implements
 
-- `SerializerStrategy`
+- [SerializerStrategy](../interfaces/serializerstrategy.md)<A, Uint8Array\>
 
 ## Table of contents
 
@@ -14,8 +20,7 @@
 
 ### Properties
 
-- [context](protobufstrategy.md#context)
-- [options](protobufstrategy.md#options)
+- [type](protobufstrategy.md#type)
 
 ### Methods
 
@@ -27,7 +32,13 @@
 
 ### constructor
 
-• **new ProtobufStrategy**(`options`)
+• **new ProtobufStrategy**<A\>(`options`)
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `A` | `A` = `any` |
 
 #### Parameters
 
@@ -37,35 +48,35 @@
 
 ## Properties
 
-### context
+### type
 
-• `Private` **context**: `Promise`<Type\>
-
-___
-
-### options
-
-• `Private` **options**: `ProtobufOptions`
+• `Private` **type**: `Promise`<Type\>
 
 ## Methods
 
 ### deserialize
 
-▸ **deserialize**(`content`): `Promise`<Stream\>
+▸ **deserialize**<T\>(`content`): `Promise`<T\>
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `content` | `Stream` |
+| `content` | `Uint8Array` |
 
 #### Returns
 
-`Promise`<Stream\>
+`Promise`<T\>
 
 #### Implementation of
 
-SerializerStrategy.deserialize
+[SerializerStrategy](../interfaces/serializerstrategy.md).[deserialize](../interfaces/serializerstrategy.md#deserialize)
 
 ___
 
@@ -87,18 +98,24 @@ ___
 
 ### serialize
 
-▸ **serialize**(`content`): `Promise`<Stream\>
+▸ **serialize**<T\>(`content`): `Promise`<Uint8Array\>
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `content` | `Stream` |
+| `content` | `T` |
 
 #### Returns
 
-`Promise`<Stream\>
+`Promise`<Uint8Array\>
 
 #### Implementation of
 
-SerializerStrategy.serialize
+[SerializerStrategy](../interfaces/serializerstrategy.md).[serialize](../interfaces/serializerstrategy.md#serialize)
