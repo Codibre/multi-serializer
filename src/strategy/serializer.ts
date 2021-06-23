@@ -6,7 +6,7 @@ export interface StrategyStream extends Stream {
 	onEnd?<T>(encode?: BufferEncoding): T;
 }
 
-export type Serialized = string | ArrayBuffer;
+export type Serialized = string | ArrayBuffer | Uint8Array;
 
 export interface SerializerStrategy<I, O extends Serialized> {
 	serialize(content: I): Promise<O> | O;
