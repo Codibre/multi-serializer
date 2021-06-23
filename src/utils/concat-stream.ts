@@ -9,7 +9,7 @@ export function concatStream(result: Stream | Serialized) {
 				result.on('data', (chunk) => {
 					res.push(chunk);
 				});
-				result.once('err', reject);
+				result.once('error', reject);
 				result.once('end', () => {
 					try {
 						resolve(Buffer.concat(res as Buffer[]));

@@ -5,6 +5,12 @@ import {
 	JsonStrategy,
 	ProtobufStrategy,
 } from '../../../src';
+import { gzip } from 'zlib';
+import { promisify } from 'util';
+import { interval } from '@codibre/fluent-iterable';
+
+const gzipAsync = promisify(gzip);
+
 describe('index.ts', () => {
 	afterEach(() => {
 		// delete require.cache[require.resolve('../../../src/serializer/index')];
@@ -164,5 +170,43 @@ describe('index.ts', () => {
 		const read = await serializer.deserialize(write);
 
 		expect(read).toMatchObject(req);
+	});
+
+	it('should work with big json with gzip', async () => {
+		const target = new Serializer(new JsonStrategy(), new GzipStrategy());
+		const data = interval(0, 300000)
+			.map(() => ({ bar: 'bar', foo: 'foo' }))
+			.toArray();
+
+		const zip = await target.serialize(data);
+		const result = await target.deserialize(zip);
+
+		expect(result).toEqual(data);
+	});
+
+	it('should return undefined when gzip decompressing throws an error', async () => {
+		const target = new Serializer(new JsonStrategy(), new GzipStrategy());
+		let err: any;
+
+		try {
+			await target.deserialize(Buffer.from('dfklsjflsdlfkjslkjfls'));
+		} catch (error) {
+			err = error;
+		}
+
+		expect(err).not.toBeUndefined();
+	});
+
+	it('should return undefined when JSON.parse throws an error', async () => {
+		const target = new Serializer(new JsonStrategy(), new GzipStrategy());
+		let err: any;
+
+		try {
+			await target.deserialize(await gzipAsync('dfklsjflsdlfkjslkjfls'));
+		} catch (error) {
+			err = error;
+		}
+
+		expect(err).not.toBeUndefined();
 	});
 });
