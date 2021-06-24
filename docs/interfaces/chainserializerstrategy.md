@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.3](../README.md) / ChainSerializerStrategy
+[fluent-iterable - v0.1.4](../README.md) / ChainSerializerStrategy
 
 # Interface: ChainSerializerStrategy<O\>
 

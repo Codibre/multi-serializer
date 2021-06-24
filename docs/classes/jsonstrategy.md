@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.3](../README.md) / JsonStrategy
+[fluent-iterable - v0.1.4](../README.md) / JsonStrategy
 
 # Class: JsonStrategy<A\>
 

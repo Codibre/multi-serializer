@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.3](../README.md) / Serializer
+[fluent-iterable - v0.1.4](../README.md) / Serializer
 
 # Class: Serializer<MainStrategy, In, FirstOut, Chain, Out\>
 

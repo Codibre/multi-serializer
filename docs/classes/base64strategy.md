@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.3](../README.md) / Base64Strategy
+[fluent-iterable - v0.1.4](../README.md) / Base64Strategy
 
 # Class: Base64Strategy
 

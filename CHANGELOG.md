@@ -1,5 +1,10 @@
 
-## 0.1.3
+## 0.1.4
+* 05e7594 Merge pull request #11 from Codibre/issue_10
+* 9bea1cb adding test to serializing json + gzip and deserializing json (error)
+* 5b25b52 Making GzipStrategy ignore non gzip input
+## v0.1.3
+* 44dccd1 0.1.3
 * 6007b76 Merge pull request #9 from Codibre/fixing-concat
 * d8dee4a fixing test description
 * 3c11101 testing big json serializing and deserializing with gzip

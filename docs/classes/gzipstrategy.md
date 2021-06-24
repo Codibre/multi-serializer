@@ -1,10 +1,10 @@
-[fluent-iterable - v0.1.3](../README.md) / GzipStrategy
+[fluent-iterable - v0.1.4](../README.md) / GzipStrategy
 
 # Class: GzipStrategy
 
 ## Implements
 
-- [ChainSerializerStrategy](../interfaces/chainserializerstrategy.md)<Stream\>
+- [ChainSerializerStrategy](../interfaces/chainserializerstrategy.md)<Stream \| [Serialized](../README.md#serialized)\>
 
 ## Table of contents
 
@@ -15,6 +15,7 @@
 ### Methods
 
 - [deserialize](gzipstrategy.md#deserialize)
+- [isGzip](gzipstrategy.md#isgzip)
 - [serialize](gzipstrategy.md#serialize)
 
 ## Constructors
@@ -33,7 +34,7 @@
 
 ### deserialize
 
-▸ **deserialize**(`content`): `Promise`<Stream\>
+▸ **deserialize**(`content`): `Promise`<[Serialized](../README.md#serialized) \| Stream\>
 
 #### Parameters
 
@@ -43,11 +44,27 @@
 
 #### Returns
 
-`Promise`<Stream\>
+`Promise`<[Serialized](../README.md#serialized) \| Stream\>
 
 #### Implementation of
 
 [ChainSerializerStrategy](../interfaces/chainserializerstrategy.md).[deserialize](../interfaces/chainserializerstrategy.md#deserialize)
+
+___
+
+### isGzip
+
+▸ `Private` **isGzip**(`content`): `boolean`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `content` | [Serialized](../README.md#serialized) \| `Stream` |
+
+#### Returns
+
+`boolean`
 
 ___
 
