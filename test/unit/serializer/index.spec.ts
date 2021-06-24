@@ -126,6 +126,43 @@ describe('index.ts', () => {
 		expect(read).toMatchObject(req);
 	});
 
+	it('should work with json serializing and json + gzip deserializing (as no gzip buffers are ignored by GzipStrategy)', async () => {
+		const req = {
+			bar: 'abc',
+		};
+		const serializer = new Serializer(new JsonStrategy<typeof req>({}));
+		const deserializer = new Serializer(
+			new JsonStrategy<typeof req>({}),
+			new GzipStrategy(),
+		);
+
+		const write = await serializer.serialize(req);
+		const read = await deserializer.deserialize(write);
+
+		expect(read).toMatchObject(req);
+	});
+
+	it('should throw an error with json + gzip serializing and json deserializing (as gzip output is no valid json string)', async () => {
+		const req = {
+			bar: 'abc',
+		};
+		const serializer = new Serializer(
+			new JsonStrategy<typeof req>({}),
+			new GzipStrategy(),
+		);
+		const deserializer = new Serializer(new JsonStrategy<typeof req>({}));
+		let err: any;
+
+		const write = await serializer.serialize(req);
+		try {
+			await deserializer.deserialize(write);
+		} catch (error) {
+			err = error;
+		}
+
+		expect(err).not.toBeUndefined();
+	});
+
 	it('should work with json + gzip + gzip', async () => {
 		const req = {
 			bar: 'abc',
