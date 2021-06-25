@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.4](../README.md) / GzipStrategy
+[fluent-iterable - v0.1.5](../README.md) / GzipStrategy
 
 # Class: GzipStrategy
 

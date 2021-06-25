@@ -1,5 +1,8 @@
 
-## 0.1.4
+## 0.1.5
+* 8c92b56 exporting utility functions
+## v0.1.4
+* feedeab 0.1.4
 * 05e7594 Merge pull request #11 from Codibre/issue_10
 * 9bea1cb adding test to serializing json + gzip and deserializing json (error)
 * 5b25b52 Making GzipStrategy ignore non gzip input
