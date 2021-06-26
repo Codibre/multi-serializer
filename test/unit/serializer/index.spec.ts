@@ -379,4 +379,32 @@ describe('index.ts', () => {
 		expect(await result2).toBe('result 2');
 		expect(result3).toBe('result 3');
 	});
+
+	it('should serialize not enqueued when enqueue is not used', async () => {
+		const target = new Serializer(new JsonStrategy());
+		const call1 = jest.fn();
+		const call2 = jest.fn();
+		const call3 = jest.fn();
+		jest
+			.spyOn(target, 'serializeFactory' as any)
+			.mockImplementationOnce(
+				() => () => wait(10).then(call1).then(constant('result 1')),
+			)
+			.mockImplementationOnce(
+				() => () => wait(2).then(call2).then(constant('result 2')),
+			)
+			.mockImplementationOnce(
+				() => () => wait(2).then(call3).then(constant('result 3')),
+			);
+
+		const result1 = target.serialize('data 1');
+		const result2 = target.serialize('data 2');
+		const result3 = await target.serialize('data 3');
+
+		expect(call2).toHaveBeenCalledBefore(call1);
+		expect(call3).toHaveBeenCalledBefore(call1);
+		expect(await result1).toBe('result 1');
+		expect(await result2).toBe('result 2');
+		expect(result3).toBe('result 3');
+	});
 });
