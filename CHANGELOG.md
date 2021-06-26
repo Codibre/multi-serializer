@@ -1,5 +1,14 @@
 
-## 0.1.5
+## 0.2.0
+* 1373b41 Merge pull request #13 from Codibre/issue_1
+* 2aec403 adding test case
+* 4f48163 exporting serializeroptions
+* 6377ffc creating enqueue option for serializer
+* 469fb71 Merge pull request #12 from Codibre/multi-strategy
+* 1e454df exporting types
+* 77eb2d5 Creating multi strategy
+## v0.1.5
+* 385bfa9 0.1.5
 * 8c92b56 exporting utility functions
 ## v0.1.4
 * feedeab 0.1.4

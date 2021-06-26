@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.5](../README.md) / ProtobufStrategy
+[fluent-iterable - v0.2.0](../README.md) / ProtobufStrategy
 
 # Class: ProtobufStrategy<A\>
 
@@ -44,7 +44,7 @@
 
 | Name | Type |
 | :------ | :------ |
-| `options` | `ProtobufOptions` |
+| `options` | [ProtobufOptions](../interfaces/protobufoptions.md) |
 
 ## Properties
 
@@ -88,7 +88,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `options` | `ProtobufOptions` |
+| `options` | [ProtobufOptions](../interfaces/protobufoptions.md) |
 
 #### Returns
 

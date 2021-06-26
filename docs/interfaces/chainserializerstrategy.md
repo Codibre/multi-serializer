@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.5](../README.md) / ChainSerializerStrategy
+[fluent-iterable - v0.2.0](../README.md) / ChainSerializerStrategy
 
 # Interface: ChainSerializerStrategy<O\>
 
@@ -18,6 +18,7 @@
 
 - [Base64Strategy](../classes/base64strategy.md)
 - [GzipStrategy](../classes/gzipstrategy.md)
+- [MultiStrategy](../classes/multistrategy.md)
 
 ## Table of contents
 

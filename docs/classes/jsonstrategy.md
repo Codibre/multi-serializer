@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.5](../README.md) / JsonStrategy
+[fluent-iterable - v0.2.0](../README.md) / JsonStrategy
 
 # Class: JsonStrategy<A\>
 
@@ -43,7 +43,7 @@
 
 | Name | Type |
 | :------ | :------ |
-| `options?` | `JsonOptions` |
+| `options?` | [JsonOptions](../interfaces/jsonoptions.md) |
 
 ## Properties
 

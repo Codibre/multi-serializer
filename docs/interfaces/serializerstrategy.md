@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.5](../README.md) / SerializerStrategy
+[fluent-iterable - v0.2.0](../README.md) / SerializerStrategy
 
 # Interface: SerializerStrategy<I, O\>
 
