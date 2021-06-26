@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.5](../README.md) / StrategyStream
+[fluent-iterable - v0.2.0](../README.md) / StrategyStream
 
 # Interface: StrategyStream
 

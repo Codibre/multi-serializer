@@ -1,6 +1,6 @@
-fluent-iterable - v0.1.5
+fluent-iterable - v0.2.0
 
-# fluent-iterable - v0.1.5
+# fluent-iterable - v0.2.0
 
 ## Table of contents
 
@@ -9,12 +9,19 @@ fluent-iterable - v0.1.5
 - [Base64Strategy](classes/base64strategy.md)
 - [GzipStrategy](classes/gzipstrategy.md)
 - [JsonStrategy](classes/jsonstrategy.md)
+- [MultiStrategy](classes/multistrategy.md)
 - [ProtobufStrategy](classes/protobufstrategy.md)
 - [Serializer](classes/serializer.md)
 
 ### Interfaces
 
 - [ChainSerializerStrategy](interfaces/chainserializerstrategy.md)
+- [EnqueueOption](interfaces/enqueueoption.md)
+- [JsonOptions](interfaces/jsonoptions.md)
+- [MultiStrategyOptions](interfaces/multistrategyoptions.md)
+- [OptionalDeserializer](interfaces/optionaldeserializer.md)
+- [ProtobufOptions](interfaces/protobufoptions.md)
+- [SerializerOptions](interfaces/serializeroptions.md)
 - [SerializerStrategy](interfaces/serializerstrategy.md)
 - [StrategyStream](interfaces/strategystream.md)
 
@@ -25,6 +32,7 @@ fluent-iterable - v0.1.5
 ### Functions
 
 - [concatStream](README.md#concatstream)
+- [enqueueTask](README.md#enqueuetask)
 - [isStream](README.md#isstream)
 - [pipeStream](README.md#pipestream)
 
@@ -38,7 +46,7 @@ fluent-iterable - v0.1.5
 
 ### concatStream
 
-▸ **concatStream**(`result`): `string` \| `ArrayBuffer` \| `Promise`<[Serialized](README.md#serialized)\>
+▸ **concatStream**(`result`): [Serialized](README.md#serialized) \| `Promise`<[Serialized](README.md#serialized)\>
 
 #### Parameters
 
@@ -48,7 +56,31 @@ fluent-iterable - v0.1.5
 
 #### Returns
 
-`string` \| `ArrayBuffer` \| `Promise`<[Serialized](README.md#serialized)\>
+[Serialized](README.md#serialized) \| `Promise`<[Serialized](README.md#serialized)\>
+
+___
+
+### enqueueTask
+
+▸ **enqueueTask**<T\>(`options`, `queueName`, `cb`): `T` \| `PromiseLike`<T\>
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `options` | [EnqueueOption](interfaces/enqueueoption.md) \| `undefined` |
+| `queueName` | `symbol` |
+| `cb` | () => `T` \| `PromiseLike`<T\> |
+
+#### Returns
+
+`T` \| `PromiseLike`<T\>
 
 ___
 
