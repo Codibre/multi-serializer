@@ -7,13 +7,30 @@ import {
 } from '../../../src';
 import { gzip } from 'zlib';
 import { promisify } from 'util';
-import { interval } from '@codibre/fluent-iterable';
+import { constant, interval } from '@codibre/fluent-iterable';
 
+const wait = promisify(setTimeout);
 const gzipAsync = promisify(gzip);
 
 describe('index.ts', () => {
-	afterEach(() => {
-		// delete require.cache[require.resolve('../../../src/serializer/index')];
+	let protoSerialize: jest.SpyInstance;
+	let protoDeserialize: jest.SpyInstance;
+	let jsonSerialize: jest.SpyInstance;
+	let jsonDeserialize: jest.SpyInstance;
+	let gzipSerialize: jest.SpyInstance;
+	let gzipDeserialize: jest.SpyInstance;
+	let b64Serialize: jest.SpyInstance;
+	let b64Deserialize: jest.SpyInstance;
+
+	beforeEach(() => {
+		protoSerialize = jest.spyOn(ProtobufStrategy.prototype, 'serialize');
+		protoDeserialize = jest.spyOn(ProtobufStrategy.prototype, 'deserialize');
+		jsonSerialize = jest.spyOn(JsonStrategy.prototype, 'serialize');
+		jsonDeserialize = jest.spyOn(JsonStrategy.prototype, 'deserialize');
+		gzipSerialize = jest.spyOn(GzipStrategy.prototype, 'serialize');
+		gzipDeserialize = jest.spyOn(GzipStrategy.prototype, 'deserialize');
+		b64Serialize = jest.spyOn(Base64Strategy.prototype, 'serialize');
+		b64Deserialize = jest.spyOn(Base64Strategy.prototype, 'deserialize');
 	});
 
 	it('should work with proto', async () => {
@@ -29,6 +46,8 @@ describe('index.ts', () => {
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 
+		expect(protoSerialize).toHaveBeenCalledTimes(1);
+		expect(protoDeserialize).toHaveBeenCalledTimes(1);
 		expect(read).toMatchObject(req);
 	});
 
@@ -48,6 +67,10 @@ describe('index.ts', () => {
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 
+		expect(protoSerialize).toHaveBeenCalledTimes(1);
+		expect(protoDeserialize).toHaveBeenCalledTimes(1);
+		expect(gzipSerialize).toHaveBeenCalledTimes(1);
+		expect(gzipDeserialize).toHaveBeenCalledTimes(1);
 		expect(read).toMatchObject(req);
 	});
 
@@ -71,6 +94,8 @@ describe('index.ts', () => {
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 
+		expect(jsonSerialize).toHaveBeenCalledTimes(1);
+		expect(jsonDeserialize).toHaveBeenCalledTimes(1);
 		expect(read).toMatchObject(req);
 	});
 
@@ -96,6 +121,10 @@ describe('index.ts', () => {
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 
+		expect(jsonSerialize).toHaveBeenCalledTimes(1);
+		expect(jsonDeserialize).toHaveBeenCalledTimes(1);
+		expect(gzipSerialize).toHaveBeenCalledTimes(1);
+		expect(gzipDeserialize).toHaveBeenCalledTimes(1);
 		expect(read).toMatchObject(req);
 	});
 
@@ -108,6 +137,8 @@ describe('index.ts', () => {
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 
+		expect(jsonSerialize).toHaveBeenCalledTimes(1);
+		expect(jsonDeserialize).toHaveBeenCalledTimes(1);
 		expect(read).toMatchObject(req);
 	});
 
@@ -123,6 +154,10 @@ describe('index.ts', () => {
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 
+		expect(jsonSerialize).toHaveBeenCalledTimes(1);
+		expect(jsonDeserialize).toHaveBeenCalledTimes(1);
+		expect(gzipSerialize).toHaveBeenCalledTimes(1);
+		expect(gzipDeserialize).toHaveBeenCalledTimes(1);
 		expect(read).toMatchObject(req);
 	});
 
@@ -139,6 +174,10 @@ describe('index.ts', () => {
 		const write = await serializer.serialize(req);
 		const read = await deserializer.deserialize(write);
 
+		expect(jsonSerialize).toHaveBeenCalledTimes(1);
+		expect(jsonDeserialize).toHaveBeenCalledTimes(1);
+		expect(gzipSerialize).toHaveBeenCalledTimes(0);
+		expect(gzipDeserialize).toHaveBeenCalledTimes(1);
 		expect(read).toMatchObject(req);
 	});
 
@@ -160,6 +199,9 @@ describe('index.ts', () => {
 			err = error;
 		}
 
+		expect(jsonSerialize).toHaveBeenCalledTimes(1);
+		expect(jsonDeserialize).toHaveBeenCalledTimes(1);
+		expect(gzipSerialize).toHaveBeenCalledTimes(1);
 		expect(err).not.toBeUndefined();
 	});
 
@@ -178,6 +220,10 @@ describe('index.ts', () => {
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 
+		expect(jsonSerialize).toHaveBeenCalledTimes(1);
+		expect(jsonDeserialize).toHaveBeenCalledTimes(1);
+		expect(gzipSerialize).toHaveBeenCalledTimes(2);
+		expect(gzipDeserialize).toHaveBeenCalledTimes(2);
 		expect(read).toMatchObject(req);
 	});
 
@@ -194,6 +240,12 @@ describe('index.ts', () => {
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 
+		expect(jsonSerialize).toHaveBeenCalledTimes(1);
+		expect(jsonDeserialize).toHaveBeenCalledTimes(1);
+		expect(gzipSerialize).toHaveBeenCalledTimes(1);
+		expect(gzipDeserialize).toHaveBeenCalledTimes(1);
+		expect(b64Serialize).toHaveBeenCalledTimes(1);
+		expect(b64Deserialize).toHaveBeenCalledTimes(1);
 		expect(read).toMatchObject(req);
 	});
 
@@ -206,6 +258,10 @@ describe('index.ts', () => {
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 
+		expect(jsonSerialize).toHaveBeenCalledTimes(1);
+		expect(jsonDeserialize).toHaveBeenCalledTimes(1);
+		expect(b64Serialize).toHaveBeenCalledTimes(1);
+		expect(b64Deserialize).toHaveBeenCalledTimes(1);
 		expect(read).toMatchObject(req);
 	});
 
@@ -218,6 +274,10 @@ describe('index.ts', () => {
 		const zip = await target.serialize(data);
 		const result = await target.deserialize(zip);
 
+		expect(jsonSerialize).toHaveBeenCalledTimes(1);
+		expect(jsonDeserialize).toHaveBeenCalledTimes(1);
+		expect(gzipSerialize).toHaveBeenCalledTimes(1);
+		expect(gzipDeserialize).toHaveBeenCalledTimes(1);
 		expect(result).toEqual(data);
 	});
 
@@ -230,7 +290,8 @@ describe('index.ts', () => {
 		} catch (error) {
 			err = error;
 		}
-
+		expect(jsonDeserialize).toHaveBeenCalledTimes(1);
+		expect(gzipDeserialize).toHaveBeenCalledTimes(1);
 		expect(err).not.toBeUndefined();
 	});
 
@@ -244,6 +305,78 @@ describe('index.ts', () => {
 			err = error;
 		}
 
+		expect(jsonDeserialize).toHaveBeenCalledTimes(1);
+		expect(gzipDeserialize).toHaveBeenCalledTimes(1);
 		expect(err).not.toBeUndefined();
+	});
+
+	it('should serialize enqueued when enqueue is used', async () => {
+		const target = new Serializer(new JsonStrategy(), { enqueue: 1 });
+		const call1 = jest.fn();
+		const call2 = jest.fn();
+		jest
+			.spyOn(target, 'serializeFactory' as any)
+			.mockImplementationOnce(
+				() => () => wait(10).then(call1).then(constant('result 1')),
+			)
+			.mockImplementationOnce(
+				() => () => wait(2).then(call2).then(constant('result 2')),
+			);
+
+		const result1 = target.serialize('data 1');
+		const result2 = await target.serialize('data 2');
+
+		expect(call1).toHaveBeenCalledBefore(call2);
+		expect(await result1).toBe('result 1');
+		expect(result2).toBe('result 2');
+	});
+
+	it('should serialize not enqueued when enqueue is used but the number of requests is lesser or equal than the pool size', async () => {
+		const target = new Serializer(new JsonStrategy(), { enqueue: 2 });
+		const call1 = jest.fn();
+		const call2 = jest.fn();
+		jest
+			.spyOn(target, 'serializeFactory' as any)
+			.mockImplementationOnce(
+				() => () => wait(10).then(call1).then(constant('result 1')),
+			)
+			.mockImplementationOnce(
+				() => () => wait(2).then(call2).then(constant('result 2')),
+			);
+
+		const result1 = target.serialize('data 1');
+		const result2 = await target.serialize('data 2');
+
+		expect(call2).toHaveBeenCalledBefore(call1);
+		expect(await result1).toBe('result 1');
+		expect(result2).toBe('result 2');
+	});
+
+	it('should serialize enqueued when enqueue is used and the number of requests is greater than the pool size', async () => {
+		const target = new Serializer(new JsonStrategy(), { enqueue: 2 });
+		const call1 = jest.fn();
+		const call2 = jest.fn();
+		const call3 = jest.fn();
+		jest
+			.spyOn(target, 'serializeFactory' as any)
+			.mockImplementationOnce(
+				() => () => wait(10).then(call1).then(constant('result 1')),
+			)
+			.mockImplementationOnce(
+				() => () => wait(4).then(call2).then(constant('result 2')),
+			)
+			.mockImplementationOnce(
+				() => () => wait(2).then(call3).then(constant('result 3')),
+			);
+
+		const result1 = target.serialize('data 1');
+		const result2 = target.serialize('data 2');
+		const result3 = await target.serialize('data 3');
+
+		expect(call2).toHaveBeenCalledBefore(call1);
+		expect(call1).toHaveBeenCalledBefore(call3);
+		expect(await result1).toBe('result 1');
+		expect(await result2).toBe('result 2');
+		expect(result3).toBe('result 3');
 	});
 });
