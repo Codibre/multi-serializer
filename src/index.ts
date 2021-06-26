@@ -1,4 +1,5 @@
 export * from './serializer';
+export * from './serializer/types';
 export * from './strategy/protobuf';
 export * from './strategy/protobuf/types';
 export * from './strategy/json';
