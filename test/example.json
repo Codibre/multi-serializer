@@ -1,0 +1,1471 @@
+{
+  "message": "Price changed from 392.86 to 402.86",
+  "oldTotal": 392.86,
+  "newTotal": 402.86,
+  "checkoutData": {
+    "id": "c8f6ee86-ae72-4aaf-a264-0a9cfddd1ec0",
+    "airlinePricing": {
+      "salePrice": 0
+    },
+    "offer": true,
+    "paymentMethods": [
+      {
+        "name": "credit_card",
+        "enabled": true,
+        "options": {
+          "installments": [
+            {
+              "brand": "mastercard",
+              "installments": [
+                {
+                  "number": 1,
+                  "value": 402.86,
+                  "firstInstallment": 402.86,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 2,
+                  "value": 145.9,
+                  "firstInstallment": 256.96,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 3,
+                  "value": 97.27,
+                  "firstInstallment": 208.32,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 4,
+                  "value": 72.95,
+                  "firstInstallment": 184.01,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 5,
+                  "value": 61.89,
+                  "firstInstallment": 172.95,
+                  "interestRate": 0.0199,
+                  "finalPrice": 420.51,
+                  "outboundPrice": 210.26,
+                  "inboundPrice": 210.26,
+                  "outboundPriceInterestRate": 8.82,
+                  "inboundPriceInterestRate": 18.83
+                },
+                {
+                  "number": 6,
+                  "value": 52.08,
+                  "firstInstallment": 163.14,
+                  "interestRate": 0.0199,
+                  "finalPrice": 423.54,
+                  "outboundPrice": 211.77,
+                  "inboundPrice": 211.77,
+                  "outboundPriceInterestRate": 10.34,
+                  "inboundPriceInterestRate": 20.34
+                },
+                {
+                  "number": 7,
+                  "value": 45.07,
+                  "firstInstallment": 156.13,
+                  "interestRate": 0.0199,
+                  "finalPrice": 426.55,
+                  "outboundPrice": 213.28,
+                  "inboundPrice": 213.28,
+                  "outboundPriceInterestRate": 11.85,
+                  "inboundPriceInterestRate": 21.85
+                },
+                {
+                  "number": 8,
+                  "value": 39.82,
+                  "firstInstallment": 150.88,
+                  "interestRate": 0.0199,
+                  "finalPrice": 429.62,
+                  "outboundPrice": 214.81,
+                  "inboundPrice": 214.81,
+                  "outboundPriceInterestRate": 13.38,
+                  "inboundPriceInterestRate": 23.38
+                },
+                {
+                  "number": 9,
+                  "value": 35.73,
+                  "firstInstallment": 146.79,
+                  "interestRate": 0.0199,
+                  "finalPrice": 432.63,
+                  "outboundPrice": 216.32,
+                  "inboundPrice": 216.32,
+                  "outboundPriceInterestRate": 14.89,
+                  "inboundPriceInterestRate": 24.89
+                }
+              ],
+              "maxInterestFreeInstallments": 4,
+              "maxInstallmentsWithInterest": 9,
+              "maxInstallments": 9
+            },
+            {
+              "brand": "visa",
+              "installments": [
+                {
+                  "number": 1,
+                  "value": 402.86,
+                  "firstInstallment": 402.86,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 2,
+                  "value": 145.9,
+                  "firstInstallment": 256.96,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 3,
+                  "value": 97.27,
+                  "firstInstallment": 208.32,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 4,
+                  "value": 72.95,
+                  "firstInstallment": 184.01,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 5,
+                  "value": 61.89,
+                  "firstInstallment": 172.95,
+                  "interestRate": 0.0199,
+                  "finalPrice": 420.51,
+                  "outboundPrice": 210.26,
+                  "inboundPrice": 210.26,
+                  "outboundPriceInterestRate": 8.82,
+                  "inboundPriceInterestRate": 18.83
+                },
+                {
+                  "number": 6,
+                  "value": 52.08,
+                  "firstInstallment": 163.14,
+                  "interestRate": 0.0199,
+                  "finalPrice": 423.54,
+                  "outboundPrice": 211.77,
+                  "inboundPrice": 211.77,
+                  "outboundPriceInterestRate": 10.34,
+                  "inboundPriceInterestRate": 20.34
+                },
+                {
+                  "number": 7,
+                  "value": 45.07,
+                  "firstInstallment": 156.13,
+                  "interestRate": 0.0199,
+                  "finalPrice": 426.55,
+                  "outboundPrice": 213.28,
+                  "inboundPrice": 213.28,
+                  "outboundPriceInterestRate": 11.85,
+                  "inboundPriceInterestRate": 21.85
+                },
+                {
+                  "number": 8,
+                  "value": 39.82,
+                  "firstInstallment": 150.88,
+                  "interestRate": 0.0199,
+                  "finalPrice": 429.62,
+                  "outboundPrice": 214.81,
+                  "inboundPrice": 214.81,
+                  "outboundPriceInterestRate": 13.38,
+                  "inboundPriceInterestRate": 23.38
+                },
+                {
+                  "number": 9,
+                  "value": 35.73,
+                  "firstInstallment": 146.79,
+                  "interestRate": 0.0199,
+                  "finalPrice": 432.63,
+                  "outboundPrice": 216.32,
+                  "inboundPrice": 216.32,
+                  "outboundPriceInterestRate": 14.89,
+                  "inboundPriceInterestRate": 24.89
+                }
+              ],
+              "maxInterestFreeInstallments": 4,
+              "maxInstallmentsWithInterest": 9,
+              "maxInstallments": 9
+            },
+            {
+              "brand": "elo",
+              "installments": [
+                {
+                  "number": 1,
+                  "value": 402.86,
+                  "firstInstallment": 402.86,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 2,
+                  "value": 145.9,
+                  "firstInstallment": 256.96,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 3,
+                  "value": 97.27,
+                  "firstInstallment": 208.32,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 4,
+                  "value": 72.95,
+                  "firstInstallment": 184.01,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 5,
+                  "value": 61.89,
+                  "firstInstallment": 172.95,
+                  "interestRate": 0.0199,
+                  "finalPrice": 420.51,
+                  "outboundPrice": 210.26,
+                  "inboundPrice": 210.26,
+                  "outboundPriceInterestRate": 8.82,
+                  "inboundPriceInterestRate": 18.83
+                },
+                {
+                  "number": 6,
+                  "value": 52.08,
+                  "firstInstallment": 163.14,
+                  "interestRate": 0.0199,
+                  "finalPrice": 423.54,
+                  "outboundPrice": 211.77,
+                  "inboundPrice": 211.77,
+                  "outboundPriceInterestRate": 10.34,
+                  "inboundPriceInterestRate": 20.34
+                },
+                {
+                  "number": 7,
+                  "value": 45.07,
+                  "firstInstallment": 156.13,
+                  "interestRate": 0.0199,
+                  "finalPrice": 426.55,
+                  "outboundPrice": 213.28,
+                  "inboundPrice": 213.28,
+                  "outboundPriceInterestRate": 11.85,
+                  "inboundPriceInterestRate": 21.85
+                },
+                {
+                  "number": 8,
+                  "value": 39.82,
+                  "firstInstallment": 150.88,
+                  "interestRate": 0.0199,
+                  "finalPrice": 429.62,
+                  "outboundPrice": 214.81,
+                  "inboundPrice": 214.81,
+                  "outboundPriceInterestRate": 13.38,
+                  "inboundPriceInterestRate": 23.38
+                },
+                {
+                  "number": 9,
+                  "value": 35.73,
+                  "firstInstallment": 146.79,
+                  "interestRate": 0.0199,
+                  "finalPrice": 432.63,
+                  "outboundPrice": 216.32,
+                  "inboundPrice": 216.32,
+                  "outboundPriceInterestRate": 14.89,
+                  "inboundPriceInterestRate": 24.89
+                }
+              ],
+              "maxInterestFreeInstallments": 4,
+              "maxInstallmentsWithInterest": 9,
+              "maxInstallments": 9
+            },
+            {
+              "brand": "amex",
+              "installments": [
+                {
+                  "number": 1,
+                  "value": 402.86,
+                  "firstInstallment": 402.86,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 2,
+                  "value": 145.9,
+                  "firstInstallment": 256.96,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 3,
+                  "value": 97.27,
+                  "firstInstallment": 208.32,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 4,
+                  "value": 72.95,
+                  "firstInstallment": 184.01,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 5,
+                  "value": 61.89,
+                  "firstInstallment": 172.95,
+                  "interestRate": 0.0199,
+                  "finalPrice": 420.51,
+                  "outboundPrice": 210.26,
+                  "inboundPrice": 210.26,
+                  "outboundPriceInterestRate": 8.82,
+                  "inboundPriceInterestRate": 18.83
+                },
+                {
+                  "number": 6,
+                  "value": 52.08,
+                  "firstInstallment": 163.14,
+                  "interestRate": 0.0199,
+                  "finalPrice": 423.54,
+                  "outboundPrice": 211.77,
+                  "inboundPrice": 211.77,
+                  "outboundPriceInterestRate": 10.34,
+                  "inboundPriceInterestRate": 20.34
+                },
+                {
+                  "number": 7,
+                  "value": 45.07,
+                  "firstInstallment": 156.13,
+                  "interestRate": 0.0199,
+                  "finalPrice": 426.55,
+                  "outboundPrice": 213.28,
+                  "inboundPrice": 213.28,
+                  "outboundPriceInterestRate": 11.85,
+                  "inboundPriceInterestRate": 21.85
+                },
+                {
+                  "number": 8,
+                  "value": 39.82,
+                  "firstInstallment": 150.88,
+                  "interestRate": 0.0199,
+                  "finalPrice": 429.62,
+                  "outboundPrice": 214.81,
+                  "inboundPrice": 214.81,
+                  "outboundPriceInterestRate": 13.38,
+                  "inboundPriceInterestRate": 23.38
+                },
+                {
+                  "number": 9,
+                  "value": 35.73,
+                  "firstInstallment": 146.79,
+                  "interestRate": 0.0199,
+                  "finalPrice": 432.63,
+                  "outboundPrice": 216.32,
+                  "inboundPrice": 216.32,
+                  "outboundPriceInterestRate": 14.89,
+                  "inboundPriceInterestRate": 24.89
+                }
+              ],
+              "maxInterestFreeInstallments": 4,
+              "maxInstallmentsWithInterest": 9,
+              "maxInstallments": 9
+            },
+            {
+              "brand": "hipercard",
+              "installments": [
+                {
+                  "number": 1,
+                  "value": 402.86,
+                  "firstInstallment": 402.86,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 2,
+                  "value": 145.9,
+                  "firstInstallment": 256.96,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 3,
+                  "value": 97.27,
+                  "firstInstallment": 208.32,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 4,
+                  "value": 72.95,
+                  "firstInstallment": 184.01,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 5,
+                  "value": 61.89,
+                  "firstInstallment": 172.95,
+                  "interestRate": 0.0199,
+                  "finalPrice": 420.51,
+                  "outboundPrice": 210.26,
+                  "inboundPrice": 210.26,
+                  "outboundPriceInterestRate": 8.82,
+                  "inboundPriceInterestRate": 18.83
+                },
+                {
+                  "number": 6,
+                  "value": 52.08,
+                  "firstInstallment": 163.14,
+                  "interestRate": 0.0199,
+                  "finalPrice": 423.54,
+                  "outboundPrice": 211.77,
+                  "inboundPrice": 211.77,
+                  "outboundPriceInterestRate": 10.34,
+                  "inboundPriceInterestRate": 20.34
+                },
+                {
+                  "number": 7,
+                  "value": 45.07,
+                  "firstInstallment": 156.13,
+                  "interestRate": 0.0199,
+                  "finalPrice": 426.55,
+                  "outboundPrice": 213.28,
+                  "inboundPrice": 213.28,
+                  "outboundPriceInterestRate": 11.85,
+                  "inboundPriceInterestRate": 21.85
+                },
+                {
+                  "number": 8,
+                  "value": 39.82,
+                  "firstInstallment": 150.88,
+                  "interestRate": 0.0199,
+                  "finalPrice": 429.62,
+                  "outboundPrice": 214.81,
+                  "inboundPrice": 214.81,
+                  "outboundPriceInterestRate": 13.38,
+                  "inboundPriceInterestRate": 23.38
+                },
+                {
+                  "number": 9,
+                  "value": 35.73,
+                  "firstInstallment": 146.79,
+                  "interestRate": 0.0199,
+                  "finalPrice": 432.63,
+                  "outboundPrice": 216.32,
+                  "inboundPrice": 216.32,
+                  "outboundPriceInterestRate": 14.89,
+                  "inboundPriceInterestRate": 24.89
+                }
+              ],
+              "maxInterestFreeInstallments": 4,
+              "maxInstallmentsWithInterest": 9,
+              "maxInstallments": 9
+            },
+            {
+              "brand": "diners",
+              "installments": [
+                {
+                  "number": 1,
+                  "value": 402.86,
+                  "firstInstallment": 402.86,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 2,
+                  "value": 145.9,
+                  "firstInstallment": 256.96,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 3,
+                  "value": 97.27,
+                  "firstInstallment": 208.32,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 4,
+                  "value": 72.95,
+                  "firstInstallment": 184.01,
+                  "interestRate": 0,
+                  "finalPrice": 402.86,
+                  "outboundPrice": 201.43,
+                  "inboundPrice": 201.43,
+                  "outboundPriceInterestRate": 0,
+                  "inboundPriceInterestRate": 10
+                },
+                {
+                  "number": 5,
+                  "value": 61.89,
+                  "firstInstallment": 172.95,
+                  "interestRate": 0.0199,
+                  "finalPrice": 420.51,
+                  "outboundPrice": 210.26,
+                  "inboundPrice": 210.26,
+                  "outboundPriceInterestRate": 8.82,
+                  "inboundPriceInterestRate": 18.83
+                },
+                {
+                  "number": 6,
+                  "value": 52.08,
+                  "firstInstallment": 163.14,
+                  "interestRate": 0.0199,
+                  "finalPrice": 423.54,
+                  "outboundPrice": 211.77,
+                  "inboundPrice": 211.77,
+                  "outboundPriceInterestRate": 10.34,
+                  "inboundPriceInterestRate": 20.34
+                },
+                {
+                  "number": 7,
+                  "value": 45.07,
+                  "firstInstallment": 156.13,
+                  "interestRate": 0.0199,
+                  "finalPrice": 426.55,
+                  "outboundPrice": 213.28,
+                  "inboundPrice": 213.28,
+                  "outboundPriceInterestRate": 11.85,
+                  "inboundPriceInterestRate": 21.85
+                },
+                {
+                  "number": 8,
+                  "value": 39.82,
+                  "firstInstallment": 150.88,
+                  "interestRate": 0.0199,
+                  "finalPrice": 429.62,
+                  "outboundPrice": 214.81,
+                  "inboundPrice": 214.81,
+                  "outboundPriceInterestRate": 13.38,
+                  "inboundPriceInterestRate": 23.38
+                },
+                {
+                  "number": 9,
+                  "value": 35.73,
+                  "firstInstallment": 146.79,
+                  "interestRate": 0.0199,
+                  "finalPrice": 432.63,
+                  "outboundPrice": 216.32,
+                  "inboundPrice": 216.32,
+                  "outboundPriceInterestRate": 14.89,
+                  "inboundPriceInterestRate": 24.89
+                }
+              ],
+              "maxInterestFreeInstallments": 4,
+              "maxInstallmentsWithInterest": 9,
+              "maxInstallments": 9
+            }
+          ],
+          "expressPayment": false,
+          "multipleCharges": true
+        }
+      },
+      {
+        "name": "transfer",
+        "enabled": true,
+        "options": {
+          "accounts": {
+            "paymee": {
+              "bs2": {
+                "branch": "0000-0",
+                "account": "00000-0"
+              },
+              "itau": {
+                "branch": "7633",
+                "account": "13665-5"
+              },
+              "caixa": {
+                "branch": "3288",
+                "account": "254-2",
+                "operation": "003"
+              },
+              "inter": {
+                "branch": "0000-0",
+                "account": "00000-0"
+              },
+              "bradesco": {
+                "branch": "0095",
+                "account": "15845-3"
+              },
+              "original": {
+                "branch": "0001",
+                "account": "708879-5"
+              },
+              "santander": {
+                "branch": "0386",
+                "account": "13002973-8"
+              },
+              "banco-do-brasil": {
+                "branch": "1189-4",
+                "account": "51734-8"
+              }
+            },
+            "safetypay": {
+              "itau": {
+                "branch": "2980",
+                "account": "21880-0"
+              },
+              "bradesco": {
+                "branch": "3390",
+                "account": "060529-8"
+              },
+              "santander": {
+                "branch": "0643",
+                "account": "13002149-7"
+              }
+            }
+          },
+          "banks": [
+            {
+              "key": "banco-do-brasil",
+              "name": "Banco do Brasil",
+              "branch": "1821-0 ",
+              "account": "57152-0",
+              "acronym": "generic",
+              "accountTypesProvider": [
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cp"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cp"
+                }
+              ],
+              "accountTypesProviderApp": [
+                {
+                  "gateway": "generic",
+                  "personType": "pf",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pf",
+                  "accountType": "cp"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pj",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pj",
+                  "accountType": "cp"
+                }
+              ]
+            },
+            {
+              "key": "bradesco",
+              "name": "Bradesco",
+              "branch": "3390",
+              "account": "060529-8",
+              "acronym": "bradesco",
+              "accountTypesProvider": [
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cp"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cp"
+                }
+              ],
+              "accountTypesProviderApp": [
+                {
+                  "gateway": "generic",
+                  "personType": "pf",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pf",
+                  "accountType": "cp"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pj",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pj",
+                  "accountType": "cp"
+                }
+              ]
+            },
+            {
+              "key": "itau",
+              "name": "Itaú",
+              "branch": "2980",
+              "account": "21880-0",
+              "acronym": "generic",
+              "accountTypesProvider": [
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cp"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cp"
+                }
+              ],
+              "accountTypesProviderApp": [
+                {
+                  "gateway": "generic",
+                  "personType": "pf",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pf",
+                  "accountType": "cp"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pj",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pj",
+                  "accountType": "cp"
+                }
+              ]
+            },
+            {
+              "key": "santander",
+              "name": "Santander",
+              "branch": "0643",
+              "account": "13002149-7",
+              "acronym": "santander",
+              "accountTypesProvider": [
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cp"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cp"
+                }
+              ],
+              "accountTypesProviderApp": [
+                {
+                  "gateway": "generic",
+                  "personType": "pf",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pf",
+                  "accountType": "cp"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pj",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pj",
+                  "accountType": "cp"
+                }
+              ]
+            },
+            {
+              "key": "caixa",
+              "name": "Caixa Econômica Federal",
+              "branch": "0643",
+              "account": "3328-2",
+              "acronym": "generic",
+              "accountTypesProvider": [
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cp"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cp"
+                }
+              ],
+              "accountTypesProviderApp": [
+                {
+                  "gateway": "generic",
+                  "personType": "pf",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pf",
+                  "accountType": "cp"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pj",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pj",
+                  "accountType": "cp"
+                }
+              ]
+            },
+            {
+              "key": "original",
+              "name": "Banco Original",
+              "acronym": "generic",
+              "accountTypesProvider": [
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cp"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cp"
+                }
+              ],
+              "accountTypesProviderApp": [
+                {
+                  "gateway": "generic",
+                  "personType": "pf",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pf",
+                  "accountType": "cp"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pj",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pj",
+                  "accountType": "cp"
+                }
+              ]
+            },
+            {
+              "key": "inter",
+              "name": "Banco Inter",
+              "acronym": "inter",
+              "accountTypesProvider": [
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cp"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cp"
+                }
+              ],
+              "accountTypesProviderApp": [
+                {
+                  "gateway": "generic",
+                  "personType": "pf",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pf",
+                  "accountType": "cp"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pj",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pj",
+                  "accountType": "cp"
+                }
+              ]
+            },
+            {
+              "key": "bs2",
+              "name": "Banco BS2",
+              "acronym": "bs2",
+              "accountTypesProvider": [
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cp"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cp"
+                }
+              ],
+              "accountTypesProviderApp": [
+                {
+                  "gateway": "generic",
+                  "personType": "pf",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pf",
+                  "accountType": "cp"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pj",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "generic",
+                  "personType": "pj",
+                  "accountType": "cp"
+                }
+              ]
+            },
+            {
+              "key": "outros",
+              "name": "Outros bancos",
+              "enable": {
+                "1": {
+                  "end": "18:00:00-03:00",
+                  "begin": "09:00:00-03:00"
+                },
+                "2": {
+                  "end": "18:00:00-03:00",
+                  "begin": "09:00:00-03:00"
+                },
+                "3": {
+                  "end": "18:00:00-03:00",
+                  "begin": "09:00:00-03:00"
+                },
+                "4": {
+                  "end": "18:00:00-03:00",
+                  "begin": "09:00:00-03:00"
+                },
+                "5": {
+                  "end": "18:00:00-03:00",
+                  "begin": "09:00:00-03:00"
+                },
+                "6": {
+                  "end": "00:00:00",
+                  "begin": "00:00:00"
+                },
+                "7": {
+                  "end": "00:00:00",
+                  "begin": "00:00:00"
+                }
+              },
+              "acronym": "outros",
+              "accountTypesProvider": [
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cp"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cp"
+                }
+              ],
+              "accountTypesProvideApp": [
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pf",
+                  "accountType": "cp"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cc"
+                },
+                {
+                  "gateway": "paymee",
+                  "personType": "pj",
+                  "accountType": "cp"
+                }
+              ]
+            }
+          ],
+          "gateways": true,
+          "transferTime": 2,
+          "safetypay": false
+        }
+      },
+      {
+        "name": "credit",
+        "enabled": false,
+        "unavailabilityCode": "USER_DONT_HAVE_CREDIT_BALANCE_AVAILABLE",
+        "options": []
+      },
+      {
+        "name": "coupon",
+        "enabled": true,
+        "options": []
+      },
+      {
+        "name": "credit_rebooking",
+        "enabled": false,
+        "unavailabilityCode": "UNAVAILABLE_BALANCE_FOR_CHECKOUT",
+        "options": []
+      },
+      {
+        "name": "pix",
+        "enabled": true,
+        "options": {
+          "transferTime": 2,
+          "gateway": "paymee",
+          "bank": "pix"
+        }
+      }
+    ],
+    "additionalServices": [],
+    "buyer": {
+      "id": 2417883,
+      "countPurchases": 21
+    },
+    "outboundFlight": {
+      "cancellationRules": {
+        "rules": [
+          {
+            "name": "Latam OTA Nacional Light",
+            "title": "Antes do voo",
+            "change": {
+              "text": "R$275 + Valor do serviço prestado, limitado a R$40 + diferença tarifária (se houver).",
+              "details": {
+                "airline": "R$275 + diferença tarifária (se houver).",
+                "maxmilhas": "Valor do serviço prestado, limitado a R$40."
+              }
+            },
+            "cancellation": {
+              "text": "Reembolso somente da taxa de embarque.",
+              "details": {
+                "airline": "Não reembolsável.",
+                "maxmilhas": "Valor do serviço prestado, limitado a R$40."
+              }
+            }
+          },
+          {
+            "name": "Latam OTA Nacional Light No-show",
+            "title": "Depois do voo",
+            "change": {
+              "text": "R$360 + Valor do serviço prestado, limitado a R$40 + diferença tarifária (se houver).",
+              "details": {
+                "airline": "R$360 + diferença tarifária (se houver).",
+                "maxmilhas": "Valor do serviço prestado, limitado a R$40."
+              }
+            },
+            "cancellation": {
+              "text": "Não é permitido."
+            }
+          }
+        ]
+      },
+      "airline": "latam",
+      "airportFrom": "CGH",
+      "airportTo": "CNF",
+      "flightNumber": "LA3105",
+      "departureDate": "2021-09-18 21:10:00",
+      "arrivalDate": "2021-09-18 22:25:00",
+      "boardingFee": 35.53,
+      "salePrice": 201.43,
+      "cabin": "EC",
+      "partnerOperator": true,
+      "luggage": {
+        "checked": {
+          "weight": null,
+          "prices": []
+        },
+        "carryOn": {
+          "weight": 10,
+          "prices": [
+            0
+          ]
+        }
+      },
+      "pricing": "ota",
+      "farePrice": 145.9,
+      "stops": 0,
+      "duration": 75
+    },
+    "inboundFlight": {
+      "cancellationRules": {
+        "rules": [
+          {
+            "name": "Latam OTA Nacional Light",
+            "title": "Antes do voo",
+            "change": {
+              "text": "R$275 + Valor do serviço prestado, limitado a R$40 + diferença tarifária (se houver).",
+              "details": {
+                "airline": "R$275 + diferença tarifária (se houver).",
+                "maxmilhas": "Valor do serviço prestado, limitado a R$40."
+              }
+            },
+            "cancellation": {
+              "text": "Reembolso somente da taxa de embarque.",
+              "details": {
+                "airline": "Não reembolsável.",
+                "maxmilhas": "Valor do serviço prestado, limitado a R$40."
+              }
+            }
+          },
+          {
+            "name": "Latam OTA Nacional Light No-show",
+            "title": "Depois do voo",
+            "change": {
+              "text": "R$360 + Valor do serviço prestado, limitado a R$40 + diferença tarifária (se houver).",
+              "details": {
+                "airline": "R$360 + diferença tarifária (se houver).",
+                "maxmilhas": "Valor do serviço prestado, limitado a R$40."
+              }
+            },
+            "cancellation": {
+              "text": "Não é permitido."
+            }
+          }
+        ]
+      },
+      "airline": "latam",
+      "airportFrom": "CNF",
+      "airportTo": "CGH",
+      "flightNumber": "LA3050",
+      "departureDate": "2021-09-30 05:25:00",
+      "arrivalDate": "2021-09-30 06:45:00",
+      "boardingFee": 35.53,
+      "salePrice": 191.43,
+      "cabin": "EC",
+      "partnerOperator": true,
+      "luggage": {
+        "checked": {
+          "weight": null,
+          "prices": []
+        },
+        "carryOn": {
+          "weight": 10,
+          "prices": [
+            0
+          ]
+        }
+      },
+      "pricing": "ota",
+      "farePrice": 135.9,
+      "stops": 0,
+      "duration": 80
+    },
+    "discountsAvailable": [],
+    "discounts": {
+      "coupon": {
+        "value": 0
+      },
+      "credit": {
+        "value": 0,
+        "remainingValueToPay": 392.86,
+        "remainingCredits": 0
+      }
+    },
+    "fees": {
+      "SERVICE_FEE": 40,
+      "BOARDING_TAX": 71.06,
+      "CONVENIENCE_FEE": 0,
+      "LUGGAGE_FEE": 0,
+      "LUGGAGE_OUTBOUND_FEE": 0,
+      "AIRLINE_SURCHARGE": 0,
+      "TOTAL": 111.06,
+      "LUGGAGE_INBOUND_FEE": 0
+    },
+    "metadata": {
+      "createdDate": "2021-08-25 16:30:34",
+      "lastUpdateDate": "2021-08-25 19:37:41",
+      "creditCardAttempts": 0,
+      "recharging": {
+        "recharged": null,
+        "value": null,
+        "increased": null,
+        "keepBuying": false
+      },
+      "isCheckoutRebooking": false,
+      "purchaseType": "ota",
+      "paymeeReceived": null,
+      "expirationDate": "2021-08-25 18:30:34",
+      "expirationTimestamp": 1629916234000,
+      "expirationSecondsLeft": -4031
+    },
+    "milesPricing": {
+      "miles": 0,
+      "farePrice": 281.8,
+      "salePrice": 392.86,
+      "billingAmount": 392.86,
+      "billingAmountWithoutLuggage": 392.86,
+      "amountReceived": 392.86,
+      "economy": 0,
+      "exclusive": false
+    },
+    "orderId": {
+      "id": "ORD4049133",
+      "outbound": 4454333
+    },
+    "passengers": {
+      "adults": [
+        {
+          "firstName": "Thiago",
+          "lastName": "Oliveira Santos",
+          "fullName": "Thiago Oliveira Santos",
+          "treatment": "sr",
+          "birthday": "1985-12-26",
+          "gender": "M",
+          "passport": null,
+          "passportExpirationDate": null,
+          "outboundLuggage": null,
+          "inboundLuggage": null,
+          "rg": null,
+          "ssn": "353.445.138-44",
+          "phone": "(11) 98679-1113",
+          "documentType": "ssn"
+        }
+      ]
+    },
+    "payment": {
+      "paymentMethod": "transfer",
+      "transferDeadLine": 1629927461
+    },
+    "search": {
+      "from": "SAO",
+      "to": "BHZ",
+      "cabin": "EC",
+      "adults": 1,
+      "children": 0,
+      "infants": 0,
+      "tripType": "RT",
+      "fromCountry": "BR",
+      "toCountry": "BR",
+      "outboundDate": "2021-09-18",
+      "isRoundTrip": true,
+      "isInternational": false,
+      "isMercosul": false,
+      "createdDate": "2021-08-25 19:30:14",
+      "createdDateTimestamp": 1629919814,
+      "fromContinent": "SA",
+      "toContinent": "SA",
+      "recharging": {
+        "recharged": true,
+        "newValue": 402.86,
+        "oldValue": 392.86,
+        "diffValue": 10,
+        "increased": true
+      },
+      "inboundDate": "2021-09-30"
+    }
+  }
+}
