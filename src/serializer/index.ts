@@ -5,7 +5,7 @@ import {
 	Serialized,
 	SerializerStrategy,
 } from '../strategy/serializer';
-import { concatStream, enqueueTask } from '../utils';
+import { chainOp, concatStream, enqueueTask, resolver } from '../utils';
 import { isStrategy } from '../utils/is-strategy';
 import { SerializerOptions } from './types';
 
@@ -53,7 +53,7 @@ export class Serializer<
 		this.lastChain = this.chain.length - 1;
 	}
 
-	async serialize<T extends In>(data: T): Promise<Out> {
+	serialize<T extends In>(data: T): Out | Promise<Out> {
 		return enqueueTask(
 			this.options,
 			this.queue,
@@ -62,24 +62,29 @@ export class Serializer<
 	}
 
 	private serializeFactory<T extends In>(data: T) {
-		return async () => {
-			let result: any = await this.strategy.serialize(data);
+		return (): Out | Promise<Out> => {
+			const serialize = chainOp(
+				(i, r) => this.chain[i].serialize(r),
+				0,
+				(i) => i <= this.lastChain,
+				1,
+			);
+			const serialized = resolver(this.strategy.serialize(data), serialize);
 
-			if (this.lastChain >= 0) {
-				for (let i = 0; i <= this.lastChain; i++) {
-					result = await this.chain[i].serialize(result);
-				}
-			}
-			return concatStream(result) as Out;
+			return resolver(serialized, concatStream) as Out | Promise<Out>;
 		};
 	}
 
-	async deserialize<T extends In>(data: Out): Promise<T> {
-		let result: any = data;
-		for (let i = this.lastChain; i >= 0; i--) {
-			result = await this.chain[i].deserialize(result);
-		}
-		result = await concatStream(result);
-		return this.strategy.deserialize(result) as T;
+	deserialize<T extends In>(data: Out): T | Promise<T> {
+		const deserialize = chainOp(
+			(i, r) => this.chain[i].deserialize(r),
+			this.lastChain,
+			(i) => i >= 0,
+			-1,
+		);
+		return resolver(
+			deserialize(data),
+			this.strategy.deserialize.bind(this.strategy),
+		);
 	}
 }

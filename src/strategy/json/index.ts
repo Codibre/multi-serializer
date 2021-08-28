@@ -14,14 +14,14 @@ export class JsonStrategy<A = any>
 			: JSON.stringify;
 	}
 
-	async serialize<T extends A>(content: T): Promise<Serialized> {
+	serialize<T extends A>(content: T): Serialized | Promise<Serialized> {
 		return this.exec(content);
 	}
 
-	async deserialize<T extends A>(
+	deserialize<T extends A>(
 		content: Serialized,
 		encode: BufferEncoding = 'utf-8',
-	): Promise<T> {
+	): T | Promise<T> {
 		return JSON.parse(
 			typeof content === 'string'
 				? content

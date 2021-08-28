@@ -1,15 +1,23 @@
 import { ProtobufOptions } from './types/';
 import { load, Root, Type } from 'protobufjs';
 import { SerializerStrategy } from '../serializer';
+import { resolver } from '../../utils';
+
+function isProtoBufOptions<Other>(
+	x: ProtobufOptions | Other,
+): x is ProtobufOptions {
+	const { proto } = x as ProtobufOptions;
+	return typeof proto === 'string' || Array.isArray(proto);
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class ProtobufStrategy<A = any>
 	implements SerializerStrategy<A, Uint8Array>
 {
-	private type: Promise<Type>;
+	private type: Promise<Type> | Type;
 
-	constructor(options: ProtobufOptions) {
-		this.type = this.load(options);
+	constructor(options: ProtobufOptions | Type) {
+		this.type = isProtoBufOptions(options) ? this.load(options) : options;
 	}
 
 	private async load(options: ProtobufOptions): Promise<Type> {
@@ -25,11 +33,11 @@ export class ProtobufStrategy<A = any>
 		return type;
 	}
 
-	async serialize<T extends A>(content: T): Promise<Uint8Array> {
-		return (await this.type).encode(content).finish() || content;
+	serialize<T extends A>(content: T): Uint8Array | Promise<Uint8Array> {
+		return resolver(this.type, (x) => x.encode(content).finish() || content);
 	}
 
-	async deserialize<T extends A>(content: Uint8Array): Promise<T> {
-		return (await this.type).decode(content) as unknown as T;
+	deserialize<T extends A>(content: Uint8Array): T | Promise<T> {
+		return resolver(this.type, (x) => x.decode(content) as unknown as T);
 	}
 }

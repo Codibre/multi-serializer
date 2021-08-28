@@ -1,6 +1,6 @@
 import { ChainSerializerStrategy, Serialized } from '../serializer';
 import { Stream } from 'stream';
-import { concatStream } from '../../utils';
+import { chainOp, concatStream, isPromise, resolver } from '../../utils';
 import { MultiStrategyOptions, OptionalDeserializer } from './types';
 
 export class MultiStrategy
@@ -25,38 +25,55 @@ export class MultiStrategy
 		this.strategies = strategies;
 	}
 
-	async serialize(content: Serialized | Stream): Promise<Serialized | Stream> {
+	serialize(
+		content: Serialized | Stream,
+	): Serialized | Stream | Promise<Serialized | Stream> {
 		const { serializers } = this.options;
 		const { length } = serializers;
-		for (let i = 0; i < length; i++) {
-			const strategy = this.strategies[serializers[i]];
-			if (!strategy) {
-				throw new TypeError(`Invalid strategy index ${serializers[i]}`);
-			}
-			content = await strategy.serialize(content);
-		}
+		const serialize = chainOp(
+			(i, r) => {
+				const strategy = this.strategies[serializers[i]];
+				if (!strategy) {
+					throw new TypeError(`Invalid strategy index ${serializers[i]}`);
+				}
+				return strategy.serialize(r);
+			},
+			0,
+			(i) => i < length,
+			1,
+		);
 
-		return content;
+		return serialize(content);
 	}
 
-	async deserialize(
+	deserialize(
 		content: Serialized | Stream,
-	): Promise<Stream | Serialized> {
+	): Serialized | Stream | Promise<Stream | Serialized> {
 		let must = false;
 		const { strategies } = this;
 		const { length } = strategies;
-		do {
-			content = await concatStream(content);
-			for (let i = 0; i < length; i++) {
-				const strategy = strategies[i];
-				must = strategy.mustDeserialize(content);
-				if (must) {
-					content = await strategy.deserialize(content);
-					break;
-				}
+		function findOne(value: Serialized) {
+			let i = 0;
+			while (i < length && !(must = strategies[i].mustDeserialize(value))) {
+				i++;
 			}
-		} while (must);
+			return must ? strategies[i].deserialize(value) : value;
+		}
 
-		return content;
+		function findAll(
+			value: Serialized | Stream,
+		): Serialized | Stream | Promise<Serialized | Stream> {
+			do {
+				const result = resolver(concatStream(value), findOne);
+				if (isPromise(result)) {
+					return result.then(findAll);
+				}
+				value = result;
+			} while (must);
+
+			return value;
+		}
+
+		return findAll(content);
 	}
 }
