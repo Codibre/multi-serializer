@@ -8,6 +8,12 @@ const benchmarkSuite = new Benchmark.Suite();
 const caseJSON = new Serializer(new JsonStrategy());
 const jsonStrategy = new JsonStrategy();
 const caseJSONGzip = new Serializer(jsonStrategy, new GzipStrategy());
+const caseJSONSyncGzip = new Serializer(
+	jsonStrategy,
+	new GzipStrategy({
+		sync: true,
+	}),
+);
 const caseJSONGzipBase64 = new Serializer(
 	new JsonStrategy(),
 	new GzipStrategy(),
@@ -32,6 +38,10 @@ benchmarkSuite
 	.add('Serializer JSON + GZip', async () => {
 		const serialized = await caseJSONGzip.serialize(payload);
 		await caseJSONGzip.deserialize(serialized);
+	})
+	.add('Serializer JSON + Sync GZip', async () => {
+		const serialized = await caseJSONSyncGzip.serialize(payload);
+		await caseJSONSyncGzip.deserialize(serialized);
 	})
 	.add('Serializer JSON + Gzip + Base64', async () => {
 		const serialized = await caseJSONGzipBase64.serialize(payload);
