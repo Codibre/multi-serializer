@@ -1,3 +1,4 @@
+import { SerializerMode } from './../../utils/serializer-mode';
 import { ChainSerializerStrategy, Serialized } from '../serializer';
 import {
 	ZlibOptions,
@@ -15,7 +16,7 @@ const GZIP_HEADER_1 = 0x1f;
 const GZIP_HEADER_2 = 0x8b;
 
 export interface GzipOptions extends ZlibOptions {
-	sync?: boolean;
+	mode?: SerializerMode;
 }
 
 export class GzipStrategy
@@ -31,7 +32,7 @@ export class GzipStrategy
 	serialize(
 		content: Serialized | Stream,
 	): Serialized | Stream | Promise<Serialized | Stream> {
-		return this.options?.sync && !isStream(content)
+		return !isStream(content) && this.options?.mode === SerializerMode.SYNC
 			? gzipSync(content)
 			: pipeStream(content, createGzip(this.options));
 	}
@@ -40,11 +41,11 @@ export class GzipStrategy
 		content: Serialized | Stream,
 	): Stream | Serialized | Promise<Stream | Serialized> {
 		return resolver(concatStream(content), (r) =>
-			this.options?.sync
+			!this.mustDeserialize(r)
+				? r
+				: this.options?.mode === SerializerMode.SYNC
 				? gunzipSync(r)
-				: this.mustDeserialize(r)
-				? pipeStream(r, createGunzip(this.options))
-				: r,
+				: pipeStream(r, createGunzip(this.options)),
 		);
 	}
 }

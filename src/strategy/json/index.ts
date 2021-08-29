@@ -1,17 +1,26 @@
 import { Serialized, SerializerStrategy } from '../serializer';
 import { JsonOptions } from './types';
 import * as stringify from 'fast-json-stringify';
+import { SerializerMode, promiseFactory } from '../../utils';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class JsonStrategy<A = any>
 	implements SerializerStrategy<A, Serialized>
 {
+	static readonly instance = new JsonStrategy();
+	static readonly syncInstance = new JsonStrategy({
+		mode: SerializerMode.SYNC,
+	});
 	private exec: CallableFunction;
 
 	constructor(options?: JsonOptions) {
-		this.exec = options?.schema
+		const exec = options?.schema
 			? stringify(options.schema, options.options)
 			: JSON.stringify;
+		this.exec =
+			!options?.mode || options.mode === SerializerMode.ASYNC
+				? promiseFactory(exec)
+				: exec;
 	}
 
 	serialize<T extends A>(content: T): Serialized | Promise<Serialized> {
