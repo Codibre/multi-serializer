@@ -1,4 +1,4 @@
-[fluent-iterable - v0.2.0](../README.md) / JsonStrategy
+[fluent-iterable - v0.3.0](../README.md) / JsonStrategy
 
 # Class: JsonStrategy<A\>
 
@@ -21,6 +21,8 @@
 ### Properties
 
 - [exec](jsonstrategy.md#exec)
+- [instance](jsonstrategy.md#instance)
+- [syncInstance](jsonstrategy.md#syncinstance)
 
 ### Methods
 
@@ -51,11 +53,23 @@
 
 • `Private` **exec**: `CallableFunction`
 
+___
+
+### instance
+
+▪ `Static` `Readonly` **instance**: [JsonStrategy](jsonstrategy.md)<any\>
+
+___
+
+### syncInstance
+
+▪ `Static` `Readonly` **syncInstance**: [JsonStrategy](jsonstrategy.md)<any\>
+
 ## Methods
 
 ### deserialize
 
-▸ **deserialize**<T\>(`content`, `encode?`): `Promise`<T\>
+▸ **deserialize**<T\>(`content`, `encode?`): `T` \| `Promise`<T\>
 
 #### Type parameters
 
@@ -72,7 +86,7 @@
 
 #### Returns
 
-`Promise`<T\>
+`T` \| `Promise`<T\>
 
 #### Implementation of
 
@@ -82,7 +96,7 @@ ___
 
 ### serialize
 
-▸ **serialize**<T\>(`content`): `Promise`<[Serialized](../README.md#serialized)\>
+▸ **serialize**<T\>(`content`): [Serialized](../README.md#serialized) \| `Promise`<[Serialized](../README.md#serialized)\>
 
 #### Type parameters
 
@@ -98,7 +112,7 @@ ___
 
 #### Returns
 
-`Promise`<[Serialized](../README.md#serialized)\>
+[Serialized](../README.md#serialized) \| `Promise`<[Serialized](../README.md#serialized)\>
 
 #### Implementation of
 

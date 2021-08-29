@@ -1,4 +1,4 @@
-[fluent-iterable - v0.2.0](../README.md) / GzipStrategy
+[fluent-iterable - v0.3.0](../README.md) / GzipStrategy
 
 # Class: GzipStrategy
 
@@ -29,13 +29,13 @@
 
 | Name | Type |
 | :------ | :------ |
-| `options?` | `ZlibOptions` |
+| `options?` | [GzipOptions](../interfaces/gzipoptions.md) |
 
 ## Methods
 
 ### deserialize
 
-▸ **deserialize**(`content`): `Promise`<[Serialized](../README.md#serialized) \| Stream\>
+▸ **deserialize**(`content`): [Serialized](../README.md#serialized) \| `Stream` \| `Promise`<[Serialized](../README.md#serialized) \| Stream\>
 
 #### Parameters
 
@@ -45,7 +45,7 @@
 
 #### Returns
 
-`Promise`<[Serialized](../README.md#serialized) \| Stream\>
+[Serialized](../README.md#serialized) \| `Stream` \| `Promise`<[Serialized](../README.md#serialized) \| Stream\>
 
 #### Implementation of
 
@@ -75,7 +75,7 @@ ___
 
 ### serialize
 
-▸ **serialize**(`content`): `Promise`<Stream\>
+▸ **serialize**(`content`): [Serialized](../README.md#serialized) \| `Stream` \| `Promise`<[Serialized](../README.md#serialized) \| Stream\>
 
 #### Parameters
 
@@ -85,7 +85,7 @@ ___
 
 #### Returns
 
-`Promise`<Stream\>
+[Serialized](../README.md#serialized) \| `Stream` \| `Promise`<[Serialized](../README.md#serialized) \| Stream\>
 
 #### Implementation of
 

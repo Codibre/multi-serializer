@@ -1,4 +1,4 @@
-[fluent-iterable - v0.2.0](../README.md) / ProtobufStrategy
+[fluent-iterable - v0.3.0](../README.md) / ProtobufStrategy
 
 # Class: ProtobufStrategy<A\>
 
@@ -44,19 +44,19 @@
 
 | Name | Type |
 | :------ | :------ |
-| `options` | [ProtobufOptions](../interfaces/protobufoptions.md) |
+| `options` | [ProtobufOptions](../interfaces/protobufoptions.md) \| `Type` |
 
 ## Properties
 
 ### type
 
-• `Private` **type**: `Promise`<Type\>
+• `Private` **type**: `Type` \| `Promise`<Type\>
 
 ## Methods
 
 ### deserialize
 
-▸ **deserialize**<T\>(`content`): `Promise`<T\>
+▸ **deserialize**<T\>(`content`): `T` \| `Promise`<T\>
 
 #### Type parameters
 
@@ -72,7 +72,7 @@
 
 #### Returns
 
-`Promise`<T\>
+`T` \| `Promise`<T\>
 
 #### Implementation of
 
@@ -98,7 +98,7 @@ ___
 
 ### serialize
 
-▸ **serialize**<T\>(`content`): `Promise`<Uint8Array\>
+▸ **serialize**<T\>(`content`): `Uint8Array` \| `Promise`<Uint8Array\>
 
 #### Type parameters
 
@@ -114,7 +114,7 @@ ___
 
 #### Returns
 
-`Promise`<Uint8Array\>
+`Uint8Array` \| `Promise`<Uint8Array\>
 
 #### Implementation of
 
