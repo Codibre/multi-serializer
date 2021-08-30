@@ -1,4 +1,4 @@
-[fluent-iterable - v0.2.0](../README.md) / Serializer
+[fluent-iterable - v0.3.0](../README.md) / Serializer
 
 # Class: Serializer<MainStrategy, In, FirstOut, Chain, Out\>
 
@@ -102,7 +102,7 @@ ___
 
 ### deserialize
 
-▸ **deserialize**<T\>(`data`): `Promise`<T\>
+▸ **deserialize**<T\>(`data`): `T` \| `Promise`<T\>
 
 #### Type parameters
 
@@ -118,13 +118,13 @@ ___
 
 #### Returns
 
-`Promise`<T\>
+`T` \| `Promise`<T\>
 
 ___
 
 ### serialize
 
-▸ **serialize**<T\>(`data`): `Promise`<Out\>
+▸ **serialize**<T\>(`data`): `Out` \| `Promise`<Out\>
 
 #### Type parameters
 
@@ -140,13 +140,13 @@ ___
 
 #### Returns
 
-`Promise`<Out\>
+`Out` \| `Promise`<Out\>
 
 ___
 
 ### serializeFactory
 
-▸ `Private` **serializeFactory**<T\>(`data`): () => `Promise`<Out\>
+▸ `Private` **serializeFactory**<T\>(`data`): () => `Out` \| `Promise`<Out\>
 
 #### Type parameters
 
@@ -164,8 +164,8 @@ ___
 
 `fn`
 
-▸ (): `Promise`<Out\>
+▸ (): `Out` \| `Promise`<Out\>
 
 ##### Returns
 
-`Promise`<Out\>
+`Out` \| `Promise`<Out\>

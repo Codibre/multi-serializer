@@ -1,5 +1,16 @@
 
-## 0.2.0
+## 0.3.0
+* ae425db creating sync/async options
+* 24f2d3c adding test case with sync gzip
+* daf83de Merge branch 'benchmarking' of github.com:Codibre/multi-serializer into promise-no-promixe-fix
+* 715d72c making benchmark just manual
+* b92670c Merge branch 'benchmarking' of github.com:Codibre/multi-serializer into promise-no-promixe-fix
+* 1e7f8b8 adding lib benchmark
+* f51de4d creating benchmarking
+* c0e0d05 fix: making all serializer and deserializers to return a promise only when strictly needed
+* f0bb802 Merge pull request #15 from Codibre/release_0_2_0
+## v0.2.0
+* d7aed35 0.2.0
 * 1373b41 Merge pull request #13 from Codibre/issue_1
 * 2aec403 adding test case
 * 4f48163 exporting serializeroptions

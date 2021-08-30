@@ -1,4 +1,4 @@
-[fluent-iterable - v0.2.0](../README.md) / ProtobufOptions
+[fluent-iterable - v0.3.0](../README.md) / ProtobufOptions
 
 # Interface: ProtobufOptions
 

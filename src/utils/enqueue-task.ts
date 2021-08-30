@@ -8,8 +8,8 @@ const resolved = Promise.resolve();
 export function enqueueTask<T>(
 	options: EnqueueOption | undefined,
 	queueName: symbol,
-	cb: () => T | PromiseLike<T>,
-): T | PromiseLike<T> {
+	cb: () => T | Promise<T>,
+): T | Promise<T> {
 	if (!options?.enqueue) {
 		return cb();
 	}

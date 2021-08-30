@@ -1,4 +1,4 @@
-[fluent-iterable - v0.2.0](../README.md) / MultiStrategy
+[fluent-iterable - v0.3.0](../README.md) / MultiStrategy
 
 # Class: MultiStrategy
 
@@ -44,7 +44,7 @@
 
 ### deserialize
 
-▸ **deserialize**(`content`): `Promise`<[Serialized](../README.md#serialized) \| Stream\>
+▸ **deserialize**(`content`): [Serialized](../README.md#serialized) \| `Stream` \| `Promise`<[Serialized](../README.md#serialized) \| Stream\>
 
 #### Parameters
 
@@ -54,7 +54,7 @@
 
 #### Returns
 
-`Promise`<[Serialized](../README.md#serialized) \| Stream\>
+[Serialized](../README.md#serialized) \| `Stream` \| `Promise`<[Serialized](../README.md#serialized) \| Stream\>
 
 #### Implementation of
 
@@ -64,7 +64,7 @@ ___
 
 ### serialize
 
-▸ **serialize**(`content`): `Promise`<[Serialized](../README.md#serialized) \| Stream\>
+▸ **serialize**(`content`): [Serialized](../README.md#serialized) \| `Stream` \| `Promise`<[Serialized](../README.md#serialized) \| Stream\>
 
 #### Parameters
 
@@ -74,7 +74,7 @@ ___
 
 #### Returns
 
-`Promise`<[Serialized](../README.md#serialized) \| Stream\>
+[Serialized](../README.md#serialized) \| `Stream` \| `Promise`<[Serialized](../README.md#serialized) \| Stream\>
 
 #### Implementation of
 
