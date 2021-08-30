@@ -11,21 +11,21 @@ export class JsonStrategy<A = any>
 	static readonly syncInstance = new JsonStrategy({
 		mode: SerializerMode.SYNC,
 	});
-	private exec: CallableFunction;
 
 	constructor(options?: JsonOptions) {
 		const exec = options?.schema
 			? stringify(options.schema, options.options)
 			: JSON.stringify;
-		this.exec =
+		this.serialize = (
 			!options?.mode || options.mode === SerializerMode.ASYNC
 				? promiseFactory(exec)
-				: exec;
+				: exec
+		) as <T extends A>(content: T) => Serialized | Promise<Serialized>;
 	}
 
-	serialize<T extends A>(content: T): Serialized | Promise<Serialized> {
-		return this.exec(content);
-	}
+	readonly serialize: <T extends A>(
+		content: T,
+	) => Serialized | Promise<Serialized>;
 
 	deserialize<T extends A>(
 		content: Serialized,

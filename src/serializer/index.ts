@@ -57,12 +57,12 @@ export class Serializer<
 		return enqueueTask(
 			this.options,
 			this.queue,
-			this.serializeFactory<T>(data),
-		);
+			this.serializeFactory<T>(),
+		)(data);
 	}
 
-	private serializeFactory<T extends In>(data: T) {
-		return (): Out | Promise<Out> => {
+	private serializeFactory<T extends In>() {
+		return (data: T): Out | Promise<Out> => {
 			const serialize = chainOp(
 				(i, r) => this.chain[i].serialize(r),
 				0,
