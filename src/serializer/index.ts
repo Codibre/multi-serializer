@@ -5,7 +5,7 @@ import {
 	Serialized,
 	SerializerStrategy,
 } from '../strategy/serializer';
-import { chainOp, concatStream, enqueueTask, resolver } from '../utils';
+import { chainOp, concatStream, enqueueTaskFactory, resolver } from '../utils';
 import { isStrategy } from '../utils/is-strategy';
 import { SerializerOptions } from './types';
 
@@ -31,6 +31,12 @@ export class Serializer<
 	private readonly options: SerializerOptions;
 	private readonly chain: Chain;
 	private readonly lastChain: number;
+	private readonly chaiSerialize = (i: number, r: Serialized | Stream) =>
+		this.chain[i].serialize(r);
+	private readonly chaiDeserialize = (i: number, r: Serialized | Stream) =>
+		this.chain[i].deserialize(r);
+	private readonly checkLastChain = (i: number) => i <= this.lastChain;
+	private readonly checkZero = (i: number) => i >= 0;
 
 	constructor(strategy: MainStrategy, ...chain: Chain);
 	constructor(
@@ -51,40 +57,29 @@ export class Serializer<
 			this.chain = [options, ...chain] as Chain;
 		}
 		this.lastChain = this.chain.length - 1;
-	}
-
-	serialize<T extends In>(data: T): Out | Promise<Out> {
-		return enqueueTask(
-			this.options,
-			this.queue,
-			this.serializeFactory<T>(),
-		)(data);
-	}
-
-	private serializeFactory<T extends In>() {
-		return (data: T): Out | Promise<Out> => {
-			const serialize = chainOp(
-				(i, r) => this.chain[i].serialize(r),
-				0,
-				(i) => i <= this.lastChain,
-				1,
-			);
-			const serialized = resolver(this.strategy.serialize(data), serialize);
-
-			return resolver(serialized, concatStream) as Out | Promise<Out>;
-		};
-	}
-
-	deserialize<T extends In>(data: Out): T | Promise<T> {
 		const deserialize = chainOp(
-			(i, r) => this.chain[i].deserialize(r),
+			this.chaiDeserialize,
 			this.lastChain,
-			(i) => i >= 0,
+			this.checkZero,
 			-1,
 		);
-		return resolver(
-			deserialize(data),
-			this.strategy.deserialize.bind(this.strategy),
-		);
+		const lastDeserialize = this.strategy.deserialize.bind(this.strategy);
+		this.deserialize = (data) => resolver(deserialize(data), lastDeserialize);
+		const serialize = this.serializeFactory();
+		this.serialize = enqueueTaskFactory(this.options, this.queue, serialize);
 	}
+
+	readonly serialize: <T extends In>(data: T) => Out | Promise<Out>;
+
+	private serializeFactory<T extends In>() {
+		const serialize = chainOp(this.chaiSerialize, 0, this.checkLastChain, 1);
+		const firstSerialize = this.strategy.serialize.bind(this.strategy);
+
+		return (data: T): Out | Promise<Out> =>
+			resolver(resolver(firstSerialize(data), serialize), concatStream) as
+				| Out
+				| Promise<Out>;
+	}
+
+	readonly deserialize: <T extends In>(data: Out) => T | Promise<T>;
 }

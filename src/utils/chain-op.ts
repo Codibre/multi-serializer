@@ -12,20 +12,22 @@ export function chainOp(
 	keepGoing: (i: number, r: Serialized | Stream) => boolean,
 	inc: number,
 ) {
-	let i = init;
-	const chain = (
-		info: Serialized | Stream,
-	): Serialized | Promise<Serialized> => {
-		let result: Serialized | Stream | Promise<Serialized | Stream> = info;
-		while (keepGoing(i, result)) {
-			result = op(i, result);
-			i += inc;
-			if (isPromise(result)) {
-				return result.then(chain);
+	return (x: Serialized | Stream): Serialized | Promise<Serialized> => {
+		let i = init;
+		const chain = (
+			info: Serialized | Stream,
+		): Serialized | Promise<Serialized> => {
+			let result: Serialized | Stream | Promise<Serialized | Stream> = info;
+			while (keepGoing(i, result)) {
+				result = op(i, result);
+				i += inc;
+				if (isPromise(result)) {
+					return result.then(chain);
+				}
 			}
-		}
 
-		return concatStream(result);
+			return concatStream(result);
+		};
+		return chain(x);
 	};
-	return chain;
 }

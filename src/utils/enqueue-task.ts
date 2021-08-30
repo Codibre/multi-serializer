@@ -5,7 +5,7 @@ export interface EnqueueOption {
 }
 const resolved = Promise.resolve();
 
-export function enqueueTask<R, T>(
+export function enqueueTaskFactory<R, T>(
 	options: EnqueueOption | undefined,
 	queueName: symbol,
 	cb: (data: R) => T | Promise<T>,
