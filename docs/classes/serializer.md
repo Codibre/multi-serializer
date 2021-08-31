@@ -1,4 +1,4 @@
-[fluent-iterable - v0.3.0](../README.md) / Serializer
+[fluent-iterable - v0.4.0](../README.md) / Serializer
 
 # Class: Serializer<MainStrategy, In, FirstOut, Chain, Out\>
 
@@ -7,10 +7,10 @@
 | Name | Type |
 | :------ | :------ |
 | `MainStrategy` | `MainStrategy`: [SerializerStrategy](../interfaces/serializerstrategy.md)<any, [Serialized](../README.md#serialized)\> |
-| `In` | `In`: `MainStrategy` extends [SerializerStrategy](../interfaces/serializerstrategy.md)<infer R, any\> ? `R` : `never` |
-| `FirstOut` | `FirstOut`: `MainStrategy` extends [SerializerStrategy](../interfaces/serializerstrategy.md)<any, infer R\> ? `R` : `never` |
-| `Chain` | `Chain`: [ChainSerializerStrategy](../interfaces/chainserializerstrategy.md)[] |
-| `Out` | `Out`: `Chain` extends [...ChainSerializerStrategy[], [SerializerStrategy](../interfaces/serializerstrategy.md)<any, infer R\>] ? `R` extends `Stream` ? [Serialized](../README.md#serialized) : `R` : `FirstOut` |
+| `In` | `In`: `MainStrategy` extends [SerializerStrategy](../interfaces/serializerstrategy.md)<infer R, any\> ? `R` : `never` = `MainStrategy` extends [SerializerStrategy](../interfaces/serializerstrategy.md)<infer R, any\> ? `R` : `never` |
+| `FirstOut` | `FirstOut`: `MainStrategy` extends [SerializerStrategy](../interfaces/serializerstrategy.md)<any, infer R\> ? `R` : `never` = `MainStrategy` extends [SerializerStrategy](../interfaces/serializerstrategy.md)<any, infer R\> ? `R` : `never` |
+| `Chain` | `Chain`: [ChainSerializerStrategy](../interfaces/chainserializerstrategy.md)[] = [ChainSerializerStrategy](../interfaces/chainserializerstrategy.md)[] |
+| `Out` | `Out`: `Chain` extends [...ChainSerializerStrategy[], [SerializerStrategy](../interfaces/serializerstrategy.md)<any, infer R\>] ? `R` extends `Stream` ? [Serialized](../README.md#serialized) : `R` : `FirstOut` = `Chain` extends [...ChainSerializerStrategy[], [SerializerStrategy](../interfaces/serializerstrategy.md)<any, infer R\>] ? `R` extends `Stream` ? [Serialized](../README.md#serialized) : `R` : `FirstOut` |
 
 ## Table of contents
 
@@ -20,16 +20,8 @@
 
 ### Properties
 
-- [chain](serializer.md#chain)
-- [lastChain](serializer.md#lastchain)
-- [options](serializer.md#options)
-- [queue](serializer.md#queue)
-
-### Methods
-
 - [deserialize](serializer.md#deserialize)
 - [serialize](serializer.md#serialize)
-- [serializeFactory](serializer.md#serializefactory)
 
 ## Constructors
 
@@ -42,10 +34,10 @@
 | Name | Type |
 | :------ | :------ |
 | `MainStrategy` | `MainStrategy`: [SerializerStrategy](../interfaces/serializerstrategy.md)<any, [Serialized](../README.md#serialized), MainStrategy\> |
-| `In` | `In`: `any` |
-| `FirstOut` | `FirstOut`: [Serialized](../README.md#serialized) |
-| `Chain` | `Chain`: [ChainSerializerStrategy](../interfaces/chainserializerstrategy.md)<[Serialized](../README.md#serialized) \| Stream\>[] |
-| `Out` | `Out`: [Serialized](../README.md#serialized) |
+| `In` | `In`: `any` = `MainStrategy` extends [SerializerStrategy](../interfaces/serializerstrategy.md)<R, any\> ? `R` : `never` |
+| `FirstOut` | `FirstOut`: [Serialized](../README.md#serialized) = `MainStrategy` extends [SerializerStrategy](../interfaces/serializerstrategy.md)<any, R\> ? `R` : `never` |
+| `Chain` | `Chain`: [ChainSerializerStrategy](../interfaces/chainserializerstrategy.md)<[Serialized](../README.md#serialized) \| Stream\>[] = [ChainSerializerStrategy](../interfaces/chainserializerstrategy.md)<[Serialized](../README.md#serialized) \| Stream\>[] |
+| `Out` | `Out`: [Serialized](../README.md#serialized) = `Chain` extends [...ChainSerializerStrategy<Serialized \| Stream\>[], [SerializerStrategy](../interfaces/serializerstrategy.md)<any, R\>] ? `R` extends `Stream` ? [Serialized](../README.md#serialized) : `R` : `FirstOut` |
 
 #### Parameters
 
@@ -61,10 +53,10 @@
 | Name | Type |
 | :------ | :------ |
 | `MainStrategy` | `MainStrategy`: [SerializerStrategy](../interfaces/serializerstrategy.md)<any, [Serialized](../README.md#serialized), MainStrategy\> |
-| `In` | `In`: `any` |
-| `FirstOut` | `FirstOut`: [Serialized](../README.md#serialized) |
-| `Chain` | `Chain`: [ChainSerializerStrategy](../interfaces/chainserializerstrategy.md)<[Serialized](../README.md#serialized) \| Stream\>[] |
-| `Out` | `Out`: [Serialized](../README.md#serialized) |
+| `In` | `In`: `any` = `MainStrategy` extends [SerializerStrategy](../interfaces/serializerstrategy.md)<R, any\> ? `R` : `never` |
+| `FirstOut` | `FirstOut`: [Serialized](../README.md#serialized) = `MainStrategy` extends [SerializerStrategy](../interfaces/serializerstrategy.md)<any, R\> ? `R` : `never` |
+| `Chain` | `Chain`: [ChainSerializerStrategy](../interfaces/chainserializerstrategy.md)<[Serialized](../README.md#serialized) \| Stream\>[] = [ChainSerializerStrategy](../interfaces/chainserializerstrategy.md)<[Serialized](../README.md#serialized) \| Stream\>[] |
+| `Out` | `Out`: [Serialized](../README.md#serialized) = `Chain` extends [...ChainSerializerStrategy<Serialized \| Stream\>[], [SerializerStrategy](../interfaces/serializerstrategy.md)<any, R\>] ? `R` extends `Stream` ? [Serialized](../README.md#serialized) : `R` : `FirstOut` |
 
 #### Parameters
 
@@ -76,47 +68,27 @@
 
 ## Properties
 
-### chain
-
-• `Private` `Readonly` **chain**: `Chain`
-
-___
-
-### lastChain
-
-• `Private` `Readonly` **lastChain**: `number`
-
-___
-
-### options
-
-• `Private` `Readonly` **options**: [SerializerOptions](../interfaces/serializeroptions.md)
-
-___
-
-### queue
-
-• `Private` **queue**: `symbol`
-
-## Methods
-
 ### deserialize
 
-▸ **deserialize**<T\>(`data`): `T` \| `Promise`<T\>
+• `Readonly` **deserialize**: <T\>(`data`: `Out`) => `T` \| `Promise`<T\>
 
-#### Type parameters
+#### Type declaration
+
+▸ <T\>(`data`): `T` \| `Promise`<T\>
+
+##### Type parameters
 
 | Name | Type |
 | :------ | :------ |
 | `T` | `T`: `any` |
 
-#### Parameters
+##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `data` | `Out` |
 
-#### Returns
+##### Returns
 
 `T` \| `Promise`<T\>
 
@@ -124,47 +96,23 @@ ___
 
 ### serialize
 
-▸ **serialize**<T\>(`data`): `Out` \| `Promise`<Out\>
+• `Readonly` **serialize**: <T\>(`data`: `T`) => `Out` \| `Promise`<Out\>
 
-#### Type parameters
+#### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `T` | `T`: `any` |
+▸ <T\>(`data`): `Out` \| `Promise`<Out\>
 
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `data` | `T` |
-
-#### Returns
-
-`Out` \| `Promise`<Out\>
-
-___
-
-### serializeFactory
-
-▸ `Private` **serializeFactory**<T\>(`data`): () => `Out` \| `Promise`<Out\>
-
-#### Type parameters
+##### Type parameters
 
 | Name | Type |
 | :------ | :------ |
 | `T` | `T`: `any` |
 
-#### Parameters
+##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `data` | `T` |
-
-#### Returns
-
-`fn`
-
-▸ (): `Out` \| `Promise`<Out\>
 
 ##### Returns
 

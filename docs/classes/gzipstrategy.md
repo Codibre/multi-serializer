@@ -1,4 +1,4 @@
-[fluent-iterable - v0.3.0](../README.md) / GzipStrategy
+[fluent-iterable - v0.4.0](../README.md) / GzipStrategy
 
 # Class: GzipStrategy
 
@@ -13,11 +13,14 @@
 
 - [constructor](gzipstrategy.md#constructor)
 
-### Methods
+### Properties
 
 - [deserialize](gzipstrategy.md#deserialize)
-- [mustDeserialize](gzipstrategy.md#mustdeserialize)
 - [serialize](gzipstrategy.md#serialize)
+
+### Methods
+
+- [mustDeserialize](gzipstrategy.md#mustdeserialize)
 
 ## Constructors
 
@@ -31,19 +34,23 @@
 | :------ | :------ |
 | `options?` | [GzipOptions](../interfaces/gzipoptions.md) |
 
-## Methods
+## Properties
 
 ### deserialize
 
-▸ **deserialize**(`content`): [Serialized](../README.md#serialized) \| `Stream` \| `Promise`<[Serialized](../README.md#serialized) \| Stream\>
+• `Readonly` **deserialize**: (`content`: [Serialized](../README.md#serialized) \| `Stream`) => [Serialized](../README.md#serialized) \| `Stream` \| `Promise`<[Serialized](../README.md#serialized) \| Stream\>
 
-#### Parameters
+#### Type declaration
+
+▸ (`content`): [Serialized](../README.md#serialized) \| `Stream` \| `Promise`<[Serialized](../README.md#serialized) \| Stream\>
+
+##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `content` | [Serialized](../README.md#serialized) \| `Stream` |
 
-#### Returns
+##### Returns
 
 [Serialized](../README.md#serialized) \| `Stream` \| `Promise`<[Serialized](../README.md#serialized) \| Stream\>
 
@@ -52,6 +59,30 @@
 [ChainSerializerStrategy](../interfaces/chainserializerstrategy.md).[deserialize](../interfaces/chainserializerstrategy.md#deserialize)
 
 ___
+
+### serialize
+
+• `Readonly` **serialize**: (`content`: [Serialized](../README.md#serialized) \| `Stream`) => [Serialized](../README.md#serialized) \| `Stream` \| `Promise`<[Serialized](../README.md#serialized) \| Stream\>
+
+#### Type declaration
+
+▸ (`content`): [Serialized](../README.md#serialized) \| `Stream` \| `Promise`<[Serialized](../README.md#serialized) \| Stream\>
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `content` | [Serialized](../README.md#serialized) \| `Stream` |
+
+##### Returns
+
+[Serialized](../README.md#serialized) \| `Stream` \| `Promise`<[Serialized](../README.md#serialized) \| Stream\>
+
+#### Implementation of
+
+[ChainSerializerStrategy](../interfaces/chainserializerstrategy.md).[serialize](../interfaces/chainserializerstrategy.md#serialize)
+
+## Methods
 
 ### mustDeserialize
 
@@ -70,23 +101,3 @@ ___
 #### Implementation of
 
 [OptionalDeserializer](../interfaces/optionaldeserializer.md).[mustDeserialize](../interfaces/optionaldeserializer.md#mustdeserialize)
-
-___
-
-### serialize
-
-▸ **serialize**(`content`): [Serialized](../README.md#serialized) \| `Stream` \| `Promise`<[Serialized](../README.md#serialized) \| Stream\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `content` | [Serialized](../README.md#serialized) \| `Stream` |
-
-#### Returns
-
-[Serialized](../README.md#serialized) \| `Stream` \| `Promise`<[Serialized](../README.md#serialized) \| Stream\>
-
-#### Implementation of
-
-[ChainSerializerStrategy](../interfaces/chainserializerstrategy.md).[serialize](../interfaces/chainserializerstrategy.md#serialize)

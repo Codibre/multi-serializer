@@ -1,4 +1,4 @@
-[fluent-iterable - v0.3.0](../README.md) / JsonStrategy
+[fluent-iterable - v0.4.0](../README.md) / JsonStrategy
 
 # Class: JsonStrategy<A\>
 
@@ -20,14 +20,13 @@
 
 ### Properties
 
-- [exec](jsonstrategy.md#exec)
+- [serialize](jsonstrategy.md#serialize)
 - [instance](jsonstrategy.md#instance)
 - [syncInstance](jsonstrategy.md#syncinstance)
 
 ### Methods
 
 - [deserialize](jsonstrategy.md#deserialize)
-- [serialize](jsonstrategy.md#serialize)
 
 ## Constructors
 
@@ -49,9 +48,33 @@
 
 ## Properties
 
-### exec
+### serialize
 
-• `Private` **exec**: `CallableFunction`
+• `Readonly` **serialize**: <T\>(`content`: `T`) => [Serialized](../README.md#serialized) \| `Promise`<[Serialized](../README.md#serialized)\>
+
+#### Type declaration
+
+▸ <T\>(`content`): [Serialized](../README.md#serialized) \| `Promise`<[Serialized](../README.md#serialized)\>
+
+##### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `content` | `T` |
+
+##### Returns
+
+[Serialized](../README.md#serialized) \| `Promise`<[Serialized](../README.md#serialized)\>
+
+#### Implementation of
+
+[SerializerStrategy](../interfaces/serializerstrategy.md).[serialize](../interfaces/serializerstrategy.md#serialize)
 
 ___
 
@@ -91,29 +114,3 @@ ___
 #### Implementation of
 
 [SerializerStrategy](../interfaces/serializerstrategy.md).[deserialize](../interfaces/serializerstrategy.md#deserialize)
-
-___
-
-### serialize
-
-▸ **serialize**<T\>(`content`): [Serialized](../README.md#serialized) \| `Promise`<[Serialized](../README.md#serialized)\>
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `content` | `T` |
-
-#### Returns
-
-[Serialized](../README.md#serialized) \| `Promise`<[Serialized](../README.md#serialized)\>
-
-#### Implementation of
-
-[SerializerStrategy](../interfaces/serializerstrategy.md).[serialize](../interfaces/serializerstrategy.md#serialize)

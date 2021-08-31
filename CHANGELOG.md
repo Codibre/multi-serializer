@@ -1,5 +1,14 @@
 
-## 0.3.0
+## 0.4.0
+* 55ab8d7 removing unneeded properties
+* b868e74 more performance improvements
+* 519c9e5 impoving more
+* b0ecc2b second performance improvement
+* 230671e first performance improvement
+* 12cb0ff Merge pull request #17 from Codibre/promise-no-promixe-fix
+* c2810f1 Merge pull request #16 from Codibre/benchmarking
+## v0.3.0
+* 5464805 0.3.0
 * ae425db creating sync/async options
 * 24f2d3c adding test case with sync gzip
 * daf83de Merge branch 'benchmarking' of github.com:Codibre/multi-serializer into promise-no-promixe-fix

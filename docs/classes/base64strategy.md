@@ -1,4 +1,4 @@
-[fluent-iterable - v0.3.0](../README.md) / Base64Strategy
+[fluent-iterable - v0.4.0](../README.md) / Base64Strategy
 
 # Class: Base64Strategy
 
@@ -14,13 +14,10 @@
 
 ### Properties
 
-- [instance](base64strategy.md#instance)
-- [syncInstance](base64strategy.md#syncinstance)
-
-### Methods
-
 - [deserialize](base64strategy.md#deserialize)
 - [serialize](base64strategy.md#serialize)
+- [instance](base64strategy.md#instance)
+- [syncInstance](base64strategy.md#syncinstance)
 
 ## Constructors
 
@@ -36,29 +33,21 @@
 
 ## Properties
 
-### instance
-
-▪ `Static` `Readonly` **instance**: [Base64Strategy](base64strategy.md)
-
-___
-
-### syncInstance
-
-▪ `Static` `Readonly` **syncInstance**: [Base64Strategy](base64strategy.md)
-
-## Methods
-
 ### deserialize
 
-▸ **deserialize**(`content`): [Serialized](../README.md#serialized) \| `Promise`<[Serialized](../README.md#serialized)\>
+• `Readonly` **deserialize**: (`content`: [Serialized](../README.md#serialized) \| `Stream`) => [Serialized](../README.md#serialized) \| `Promise`<[Serialized](../README.md#serialized)\>
 
-#### Parameters
+#### Type declaration
+
+▸ (`content`): [Serialized](../README.md#serialized) \| `Promise`<[Serialized](../README.md#serialized)\>
+
+##### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `content` | `string` |
+| `content` | [Serialized](../README.md#serialized) \| `Stream` |
 
-#### Returns
+##### Returns
 
 [Serialized](../README.md#serialized) \| `Promise`<[Serialized](../README.md#serialized)\>
 
@@ -70,18 +59,34 @@ ___
 
 ### serialize
 
-▸ **serialize**(`content`): `string` \| `Promise`<string\>
+• `Readonly` **serialize**: (`content`: [Serialized](../README.md#serialized) \| `Stream`) => `string` \| `Promise`<string\>
 
-#### Parameters
+#### Type declaration
+
+▸ (`content`): `string` \| `Promise`<string\>
+
+##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `content` | [Serialized](../README.md#serialized) \| `Stream` |
 
-#### Returns
+##### Returns
 
 `string` \| `Promise`<string\>
 
 #### Implementation of
 
 [ChainSerializerStrategy](../interfaces/chainserializerstrategy.md).[serialize](../interfaces/chainserializerstrategy.md#serialize)
+
+___
+
+### instance
+
+▪ `Static` `Readonly` **instance**: [Base64Strategy](base64strategy.md)
+
+___
+
+### syncInstance
+
+▪ `Static` `Readonly` **syncInstance**: [Base64Strategy](base64strategy.md)

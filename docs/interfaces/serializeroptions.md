@@ -1,4 +1,4 @@
-[fluent-iterable - v0.3.0](../README.md) / SerializerOptions
+[fluent-iterable - v0.4.0](../README.md) / SerializerOptions
 
 # Interface: SerializerOptions
 

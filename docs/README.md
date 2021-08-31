@@ -1,6 +1,6 @@
-fluent-iterable - v0.3.0
+fluent-iterable - v0.4.0
 
-# fluent-iterable - v0.3.0
+# fluent-iterable - v0.4.0
 
 ## Table of contents
 
@@ -39,10 +39,11 @@ fluent-iterable - v0.3.0
 
 - [chainOp](README.md#chainop)
 - [concatStream](README.md#concatstream)
-- [enqueueTask](README.md#enqueuetask)
+- [enqueueTaskFactory](README.md#enqueuetaskfactory)
 - [isPromise](README.md#ispromise)
 - [isStream](README.md#isstream)
 - [pipeStream](README.md#pipestream)
+- [preChainOp](README.md#prechainop)
 - [promiseFactory](README.md#promisefactory)
 - [resolver](README.md#resolver)
 
@@ -56,7 +57,7 @@ fluent-iterable - v0.3.0
 
 ### chainOp
 
-▸ **chainOp**(`op`, `init`, `keepGoing`, `inc`): (`info`: [Serialized](README.md#serialized) \| `Stream`) => [Serialized](README.md#serialized) \| `Promise`<[Serialized](README.md#serialized)\>
+▸ **chainOp**(`op`, `init`, `keepGoing`, `inc`): (`x`: [Serialized](README.md#serialized) \| `Stream`) => [Serialized](README.md#serialized) \| `Promise`<[Serialized](README.md#serialized)\>
 
 #### Parameters
 
@@ -71,13 +72,13 @@ fluent-iterable - v0.3.0
 
 `fn`
 
-▸ (`info`): [Serialized](README.md#serialized) \| `Promise`<[Serialized](README.md#serialized)\>
+▸ (`x`): [Serialized](README.md#serialized) \| `Promise`<[Serialized](README.md#serialized)\>
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `info` | [Serialized](README.md#serialized) \| `Stream` |
+| `x` | [Serialized](README.md#serialized) \| `Stream` |
 
 ##### Returns
 
@@ -101,14 +102,15 @@ ___
 
 ___
 
-### enqueueTask
+### enqueueTaskFactory
 
-▸ **enqueueTask**<T\>(`options`, `queueName`, `cb`): `T` \| `Promise`<T\>
+▸ **enqueueTaskFactory**<R, T\>(`options`, `queueName`, `cb`): (`data`: `R`) => `T` \| `Promise`<T\>
 
 #### Type parameters
 
 | Name |
 | :------ |
+| `R` |
 | `T` |
 
 #### Parameters
@@ -117,9 +119,21 @@ ___
 | :------ | :------ |
 | `options` | [EnqueueOption](interfaces/enqueueoption.md) \| `undefined` |
 | `queueName` | `symbol` |
-| `cb` | () => `T` \| `Promise`<T\> |
+| `cb` | (`data`: `R`) => `T` \| `Promise`<T\> |
 
 #### Returns
+
+`fn`
+
+▸ (`data`): `T` \| `Promise`<T\>
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | `R` |
+
+##### Returns
 
 `T` \| `Promise`<T\>
 
@@ -177,6 +191,37 @@ ___
 #### Returns
 
 `Writable`
+
+___
+
+### preChainOp
+
+▸ **preChainOp**(`op`, `init`, `keepGoing`, `inc`): (`result`: `Stream` \| [Serialized](README.md#serialized)) => [Serialized](README.md#serialized) \| `Promise`<[Serialized](README.md#serialized)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `op` | (`i`: `number`) => (`result`: `Stream` \| [Serialized](README.md#serialized)) => [Serialized](README.md#serialized) \| `Stream` \| `Promise`<[Serialized](README.md#serialized) \| Stream\> |
+| `init` | `number` |
+| `keepGoing` | (`i`: `number`) => `boolean` |
+| `inc` | `number` |
+
+#### Returns
+
+`fn`
+
+▸ (`result`): [Serialized](README.md#serialized) \| `Promise`<[Serialized](README.md#serialized)\>
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `result` | `Stream` \| [Serialized](README.md#serialized) |
+
+##### Returns
+
+[Serialized](README.md#serialized) \| `Promise`<[Serialized](README.md#serialized)\>
 
 ___
 
