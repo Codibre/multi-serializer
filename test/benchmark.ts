@@ -1,23 +1,26 @@
 import { Base64Strategy } from '../src/strategy/base64/index';
 import { GzipStrategy } from '../src/strategy/gzip/index';
 import Benchmark = require('benchmark');
-import { JsonStrategy, Serializer, SerializerMode } from '../src';
+import { JsonStrategy, Serialized, Serializer, SerializerMode } from '../src';
 
 const benchmarkSuite = new Benchmark.Suite();
 
 const caseJSON = new Serializer(new JsonStrategy());
-const caseAsyncJSON = new Serializer(
+const caseSyncJSON = new Serializer(
 	new JsonStrategy({
-		mode: SerializerMode.ASYNC,
+		mode: SerializerMode.SYNC,
 	}),
 );
 const jsonStrategy = new JsonStrategy();
+const syncJsonStrategy = new JsonStrategy({ mode: SerializerMode.SYNC });
 const caseJSONGzip = new Serializer(jsonStrategy, new GzipStrategy());
-const caseAsyncJSONGzip = new Serializer(
+const caseSyncJSONSyncGzip = new Serializer(
 	new JsonStrategy({
-		mode: SerializerMode.ASYNC,
+		mode: SerializerMode.SYNC,
 	}),
-	new GzipStrategy(),
+	new GzipStrategy({
+		mode: SerializerMode.SYNC,
+	}),
 );
 const caseJSONSyncGzip = new Serializer(
 	jsonStrategy,
@@ -39,6 +42,10 @@ const payload = require('./example.json');
 let log = '';
 console.log(`Node version: ${process.version}`);
 benchmarkSuite
+	.add('Just Sync JSON Strategy', async () => {
+		const serialized = await syncJsonStrategy.serialize(payload);
+		await jsonStrategy.deserialize(serialized);
+	})
 	.add('JSON Vanilla', async () => {
 		const serialized = JSON.stringify(payload);
 		JSON.parse(serialized);
@@ -51,13 +58,13 @@ benchmarkSuite
 		const serialized = await caseJSON.serialize(payload);
 		await caseJSON.deserialize(serialized);
 	})
-	.add('Serializer Async JSON', async () => {
-		const serialized = await caseAsyncJSON.serialize(payload);
-		await caseAsyncJSON.deserialize(serialized);
+	.add('Serializer Sync JSON', async () => {
+		const serialized = await caseSyncJSON.serialize(payload);
+		await caseSyncJSON.deserialize(serialized);
 	})
-	.add('Serializer Async JSON + GZip', async () => {
-		const serialized = await caseAsyncJSONGzip.serialize(payload);
-		await caseAsyncJSONGzip.deserialize(serialized);
+	.add('Serializer Sync JSON + Sync GZip', () => {
+		const serialized = caseSyncJSONSyncGzip.serialize(payload) as Serialized;
+		caseSyncJSONSyncGzip.deserialize(serialized);
 	})
 	.add('Serializer JSON + GZip', async () => {
 		const serialized = await caseJSONGzip.serialize(payload);

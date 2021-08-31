@@ -3,6 +3,11 @@ import { JsonOptions } from './types';
 import * as stringify from 'fast-json-stringify';
 import { SerializerMode, promiseFactory } from '../../utils';
 
+type Serialize<A> = <T extends A>(
+	content: T,
+) => Serialized | Promise<Serialized>;
+type Deserialize<A> = <T extends A>(content: Serialized) => T | Promise<T>;
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class JsonStrategy<A = any>
 	implements SerializerStrategy<A, Serialized>
@@ -13,28 +18,17 @@ export class JsonStrategy<A = any>
 	});
 
 	constructor(options?: JsonOptions) {
-		const exec = options?.schema
+		this.serialize = options?.schema
 			? stringify(options.schema, options.options)
 			: JSON.stringify;
-		this.serialize = (
-			!options?.mode || options.mode === SerializerMode.ASYNC
-				? promiseFactory(exec)
-				: exec
-		) as <T extends A>(content: T) => Serialized | Promise<Serialized>;
+		this.deserialize = JSON.parse as Deserialize<A>;
+		if (options?.mode !== SerializerMode.SYNC) {
+			this.serialize = promiseFactory(this.serialize) as Serialize<A>;
+			this.deserialize = promiseFactory(this.deserialize) as Deserialize<A>;
+		}
 	}
 
-	readonly serialize: <T extends A>(
-		content: T,
-	) => Serialized | Promise<Serialized>;
+	readonly serialize: Serialize<A>;
 
-	deserialize<T extends A>(
-		content: Serialized,
-		encode: BufferEncoding = 'utf-8',
-	): T | Promise<T> {
-		return JSON.parse(
-			typeof content === 'string'
-				? content
-				: Buffer.from(content).toString(encode),
-		);
-	}
+	readonly deserialize: Deserialize<A>;
 }
