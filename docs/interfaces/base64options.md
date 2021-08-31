@@ -1,4 +1,4 @@
-[fluent-iterable - v0.4.1](../README.md) / Base64Options
+[fluent-iterable - v0.4.2](../README.md) / Base64Options
 
 # Interface: Base64Options
 
