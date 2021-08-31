@@ -33,8 +33,11 @@ export class GzipStrategy
 			);
 		const gzipAsync = (content: Serialized | Stream) =>
 			pipeStream(content, createGzip(options));
-		this.serialize = (content) =>
-			isStream(content) ? gzipAsync(content) : gzipSync(content);
+		this.serialize =
+			options?.mode === SerializerMode.SYNC
+				? (content) =>
+						isStream(content) ? gzipAsync(content) : gzipSync(content)
+				: gzipAsync;
 	}
 
 	mustDeserialize(content: Serialized): boolean {
