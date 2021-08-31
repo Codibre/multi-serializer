@@ -11,12 +11,20 @@ function serialize(content: Serialized | Stream): string | Promise<string> {
 	return resolver(concatStream(content), toBase64);
 }
 
-function deserialize(content: string): Serialized | Promise<Serialized> {
-	return Buffer.from(content, 'base64');
+function deserialize(
+	content: Serialized | Stream,
+): Serialized | Promise<Serialized> {
+	return resolver(concatStream(content), (r) =>
+		Buffer.from(r instanceof Buffer ? r.toString() : (r as string), 'base64'),
+	);
 }
 
-const promiseSerialize = promiseFactory(serialize);
-const promiseDeserialize = promiseFactory(deserialize);
+const promiseSerialize = promiseFactory(serialize) as (
+	content: Serialized | Stream,
+) => Promise<string>;
+const promiseDeserialize = promiseFactory(deserialize) as (
+	content: Serialized | Stream,
+) => Promise<Serialized>;
 
 export interface Base64Options {
 	mode: SerializerMode;
@@ -28,17 +36,20 @@ export class Base64Strategy implements ChainSerializerStrategy<string> {
 		mode: SerializerMode.SYNC,
 	});
 
-	constructor(private options?: Base64Options) {}
-
-	serialize(content: Serialized | Stream): string | Promise<string> {
-		return this.options?.mode === SerializerMode.SYNC
-			? serialize(content)
-			: (promiseSerialize(content) as Promise<string>);
+	constructor(private options?: Base64Options) {
+		this.serialize =
+			this.options?.mode === SerializerMode.SYNC ? serialize : promiseSerialize;
+		this.deserialize =
+			this.options?.mode === SerializerMode.SYNC
+				? deserialize
+				: promiseDeserialize;
 	}
 
-	deserialize(content: string): Serialized | Promise<Serialized> {
-		return this.options?.mode === SerializerMode.SYNC
-			? deserialize(content)
-			: (promiseDeserialize(content) as Promise<Serialized>);
-	}
+	readonly serialize: (
+		content: Serialized | Stream,
+	) => string | Promise<string>;
+
+	readonly deserialize: (
+		content: Serialized | Stream,
+	) => Serialized | Promise<Serialized>;
 }

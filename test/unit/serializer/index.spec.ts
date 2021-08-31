@@ -22,10 +22,16 @@ describe('index.ts', () => {
 	let jsonDeserialize: jest.SpyInstance;
 	let syncJsonSerialize: jest.SpyInstance;
 	let syncJsonDeserialize: jest.SpyInstance;
+	let gzip9Serialize: jest.SpyInstance;
+	let gzip9Deserialize: jest.SpyInstance;
 	let gzipSerialize: jest.SpyInstance;
 	let gzipDeserialize: jest.SpyInstance;
+	let gzipSyncSerialize: jest.SpyInstance;
+	let gzipSyncDeserialize: jest.SpyInstance;
 	let b64Serialize: jest.SpyInstance;
 	let b64Deserialize: jest.SpyInstance;
+	let b64SyncSerialize: jest.SpyInstance;
+	let b64SyncDeserialize: jest.SpyInstance;
 	const protoStrategy = new ProtobufStrategy<any>({
 		attribute: 'a.b.Foo',
 		proto: './foo.proto',
@@ -43,6 +49,15 @@ describe('index.ts', () => {
 	});
 	const jsonStrategy = new JsonStrategy<any>();
 	const syncJsonStrategy = new JsonStrategy<any>({ mode: SerializerMode.SYNC });
+	const gzip9Strategy = new GzipStrategy({
+		level: 9,
+	});
+	const gzipStrategy = new GzipStrategy();
+	const gzipSyncStrategy = new GzipStrategy({
+		mode: SerializerMode.SYNC,
+	});
+	const b64Strategy = new Base64Strategy();
+	const b64SyncStrategy = new Base64Strategy({ mode: SerializerMode.SYNC });
 
 	beforeEach(() => {
 		protoSerialize = jest.spyOn(protoStrategy, 'serialize');
@@ -53,10 +68,16 @@ describe('index.ts', () => {
 		fastJsonDeserialize = jest.spyOn(fastJsonStrategy, 'deserialize');
 		syncJsonSerialize = jest.spyOn(syncJsonStrategy, 'serialize');
 		syncJsonDeserialize = jest.spyOn(syncJsonStrategy, 'deserialize');
-		gzipSerialize = jest.spyOn(GzipStrategy.prototype, 'serialize');
-		gzipDeserialize = jest.spyOn(GzipStrategy.prototype, 'deserialize');
-		b64Serialize = jest.spyOn(Base64Strategy.prototype, 'serialize');
-		b64Deserialize = jest.spyOn(Base64Strategy.prototype, 'deserialize');
+		gzip9Serialize = jest.spyOn(gzip9Strategy, 'serialize');
+		gzip9Deserialize = jest.spyOn(gzip9Strategy, 'deserialize');
+		gzipSerialize = jest.spyOn(gzipStrategy, 'serialize');
+		gzipDeserialize = jest.spyOn(gzipStrategy, 'deserialize');
+		gzipSyncSerialize = jest.spyOn(gzipSyncStrategy, 'serialize');
+		gzipSyncDeserialize = jest.spyOn(gzipSyncStrategy, 'deserialize');
+		b64SyncSerialize = jest.spyOn(b64SyncStrategy, 'serialize');
+		b64SyncDeserialize = jest.spyOn(b64SyncStrategy, 'deserialize');
+		b64Serialize = jest.spyOn(b64Strategy, 'serialize');
+		b64Deserialize = jest.spyOn(b64Strategy, 'deserialize');
 	});
 
 	it('should work with proto', async () => {
@@ -76,19 +97,14 @@ describe('index.ts', () => {
 		const req = {
 			bar: 'abc',
 		};
-		const serializer = new Serializer(
-			protoStrategy,
-			new GzipStrategy({
-				level: 9,
-			}),
-		);
+		const serializer = new Serializer(protoStrategy, gzip9Strategy);
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 
 		expect(protoSerialize).toHaveBeenCalledTimes(1);
 		expect(protoDeserialize).toHaveBeenCalledTimes(1);
-		expect(gzipSerialize).toHaveBeenCalledTimes(1);
-		expect(gzipDeserialize).toHaveBeenCalledTimes(1);
+		expect(gzip9Serialize).toHaveBeenCalledTimes(1);
+		expect(gzip9Deserialize).toHaveBeenCalledTimes(1);
 		expect(read).toMatchObject(req);
 	});
 
@@ -109,7 +125,7 @@ describe('index.ts', () => {
 		const req = {
 			bar: 'abc',
 		};
-		const serializer = new Serializer(fastJsonStrategy, new GzipStrategy());
+		const serializer = new Serializer(fastJsonStrategy, gzipStrategy);
 
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
@@ -125,20 +141,15 @@ describe('index.ts', () => {
 		const req = {
 			bar: 'abc',
 		};
-		const serializer = new Serializer(
-			fastJsonStrategy,
-			new GzipStrategy({
-				mode: SerializerMode.SYNC,
-			}),
-		);
+		const serializer = new Serializer(fastJsonStrategy, gzipSyncStrategy);
 
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 
 		expect(fastJsonSerialize).toHaveBeenCalledTimes(1);
 		expect(fastJsonDeserialize).toHaveBeenCalledTimes(1);
-		expect(gzipSerialize).toHaveBeenCalledTimes(1);
-		expect(gzipDeserialize).toHaveBeenCalledTimes(1);
+		expect(gzipSyncSerialize).toHaveBeenCalledTimes(1);
+		expect(gzipSyncDeserialize).toHaveBeenCalledTimes(1);
 		expect(read).toMatchObject(req);
 	});
 
@@ -172,7 +183,7 @@ describe('index.ts', () => {
 		const req = {
 			bar: 'abc',
 		};
-		const serializer = new Serializer(jsonStrategy, new GzipStrategy());
+		const serializer = new Serializer(jsonStrategy, gzipStrategy);
 
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
@@ -189,7 +200,7 @@ describe('index.ts', () => {
 			bar: 'abc',
 		};
 		const serializer = new Serializer(jsonStrategy);
-		const deserializer = new Serializer(jsonStrategy, new GzipStrategy());
+		const deserializer = new Serializer(jsonStrategy, gzipStrategy);
 
 		const write = await serializer.serialize(req);
 		const read = await deserializer.deserialize(write);
@@ -206,20 +217,15 @@ describe('index.ts', () => {
 			bar: 'abc',
 		};
 		const serializer = new Serializer(jsonStrategy);
-		const deserializer = new Serializer(
-			jsonStrategy,
-			new GzipStrategy({
-				mode: SerializerMode.SYNC,
-			}),
-		);
+		const deserializer = new Serializer(jsonStrategy, gzipSyncStrategy);
 
 		const write = await serializer.serialize(req);
 		const read = await deserializer.deserialize(write);
 
 		expect(jsonSerialize).toHaveBeenCalledTimes(1);
 		expect(jsonDeserialize).toHaveBeenCalledTimes(1);
-		expect(gzipSerialize).toHaveBeenCalledTimes(0);
-		expect(gzipDeserialize).toHaveBeenCalledTimes(1);
+		expect(gzipSyncSerialize).toHaveBeenCalledTimes(0);
+		expect(gzipSyncDeserialize).toHaveBeenCalledTimes(1);
 		expect(read).toMatchObject(req);
 	});
 
@@ -227,7 +233,7 @@ describe('index.ts', () => {
 		const req = {
 			bar: 'abc',
 		};
-		const serializer = new Serializer(jsonStrategy, new GzipStrategy());
+		const serializer = new Serializer(jsonStrategy, gzipStrategy);
 		const deserializer = new Serializer(jsonStrategy);
 		let err: any;
 
@@ -250,10 +256,8 @@ describe('index.ts', () => {
 		};
 		const serializer = new Serializer(
 			jsonStrategy,
-			new GzipStrategy(),
-			new GzipStrategy({
-				level: 9,
-			}),
+			gzipStrategy,
+			gzip9Strategy,
 		);
 
 		const write = await serializer.serialize(req);
@@ -261,8 +265,10 @@ describe('index.ts', () => {
 
 		expect(jsonSerialize).toHaveBeenCalledTimes(1);
 		expect(jsonDeserialize).toHaveBeenCalledTimes(1);
-		expect(gzipSerialize).toHaveBeenCalledTimes(2);
-		expect(gzipDeserialize).toHaveBeenCalledTimes(2);
+		expect(gzipSerialize).toHaveBeenCalledTimes(1);
+		expect(gzipDeserialize).toHaveBeenCalledTimes(1);
+		expect(gzip9Serialize).toHaveBeenCalledTimes(1);
+		expect(gzip9Deserialize).toHaveBeenCalledTimes(1);
 		expect(read).toMatchObject(req);
 	});
 
@@ -270,11 +276,7 @@ describe('index.ts', () => {
 		const req = {
 			bar: 'abc',
 		};
-		const serializer = new Serializer(
-			jsonStrategy,
-			new GzipStrategy(),
-			new Base64Strategy(),
-		);
+		const serializer = new Serializer(jsonStrategy, gzipStrategy, b64Strategy);
 
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
@@ -292,7 +294,7 @@ describe('index.ts', () => {
 		const req = {
 			bar: 'abc',
 		};
-		const serializer = new Serializer(jsonStrategy, new Base64Strategy());
+		const serializer = new Serializer(jsonStrategy, b64Strategy);
 
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
@@ -308,23 +310,20 @@ describe('index.ts', () => {
 		const req = {
 			bar: 'abc',
 		};
-		const serializer = new Serializer(
-			jsonStrategy,
-			Base64Strategy.syncInstance,
-		);
+		const serializer = new Serializer(jsonStrategy, b64SyncStrategy);
 
 		const write = await serializer.serialize(req);
 		const read = await serializer.deserialize(write);
 
 		expect(jsonSerialize).toHaveBeenCalledTimes(1);
 		expect(jsonDeserialize).toHaveBeenCalledTimes(1);
-		expect(b64Serialize).toHaveBeenCalledTimes(1);
-		expect(b64Deserialize).toHaveBeenCalledTimes(1);
+		expect(b64SyncSerialize).toHaveBeenCalledTimes(1);
+		expect(b64SyncDeserialize).toHaveBeenCalledTimes(1);
 		expect(read).toMatchObject(req);
 	});
 
 	it('should work with big json with gzip', async () => {
-		const target = new Serializer(jsonStrategy, new GzipStrategy());
+		const target = new Serializer(jsonStrategy, gzipStrategy);
 		const data = interval(0, 300000)
 			.map(() => ({ bar: 'bar', foo: 'foo' }))
 			.toArray();
@@ -340,7 +339,7 @@ describe('index.ts', () => {
 	});
 
 	it('should return undefined when gzip decompressing throws an error', async () => {
-		const target = new Serializer(jsonStrategy, new GzipStrategy());
+		const target = new Serializer(jsonStrategy, gzipStrategy);
 		let err: any;
 
 		try {
@@ -354,7 +353,7 @@ describe('index.ts', () => {
 	});
 
 	it('should return undefined when JSON.parse throws an error', async () => {
-		const target = new Serializer(jsonStrategy, new GzipStrategy());
+		const target = new Serializer(jsonStrategy, gzipStrategy);
 		let err: any;
 
 		try {

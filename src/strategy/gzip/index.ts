@@ -22,30 +22,31 @@ export interface GzipOptions extends ZlibOptions {
 export class GzipStrategy
 	implements ChainSerializerStrategy<Stream | Serialized>, OptionalDeserializer
 {
-	constructor(private options?: GzipOptions) {}
+	constructor(private options?: GzipOptions) {
+		const deserialize =
+			this.options?.mode === SerializerMode.SYNC
+				? gunzipSync
+				: (r: Serialized) => pipeStream(r, createGunzip(this.options));
+		this.deserialize = (content) =>
+			resolver(concatStream(content), (r) =>
+				this.mustDeserialize(r) ? deserialize(r) : r,
+			);
+		const gzipAsync = (content: Serialized | Stream) =>
+			pipeStream(content, createGzip(this.options));
+		this.serialize = (content) =>
+			isStream(content) ? gzipAsync(content) : gzipSync(content);
+	}
 
 	mustDeserialize(content: Serialized): boolean {
 		const buff = Buffer.from(content.slice(0, HEADER_LIMIT) as ArrayBuffer);
 		return buff[0] === GZIP_HEADER_1 && buff[1] === GZIP_HEADER_2;
 	}
 
-	serialize(
+	readonly serialize: (
 		content: Serialized | Stream,
-	): Serialized | Stream | Promise<Serialized | Stream> {
-		return !isStream(content) && this.options?.mode === SerializerMode.SYNC
-			? gzipSync(content)
-			: pipeStream(content, createGzip(this.options));
-	}
+	) => Serialized | Stream | Promise<Serialized | Stream>;
 
-	deserialize(
+	readonly deserialize: (
 		content: Serialized | Stream,
-	): Stream | Serialized | Promise<Stream | Serialized> {
-		return resolver(concatStream(content), (r) =>
-			!this.mustDeserialize(r)
-				? r
-				: this.options?.mode === SerializerMode.SYNC
-				? gunzipSync(r)
-				: pipeStream(r, createGunzip(this.options)),
-		);
-	}
+	) => Stream | Serialized | Promise<Stream | Serialized>;
 }
