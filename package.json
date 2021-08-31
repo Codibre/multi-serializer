@@ -1,6 +1,6 @@
 {
   "name": "multi-serializer",
-  "description": "This project is just a template for creation of new projects",
+  "description": "An optimized and standardized way to combine multiple serializing strategies into one simple call",
   "version": "0.4.1",
   "author": {
     "name": "Gustavo S. Rodrigues <gustavo.beavis@gmail.com>"
