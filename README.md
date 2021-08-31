@@ -6,7 +6,7 @@
 [![Packages](https://david-dm.org/Codibre/multi-serializer.svg)](https://david-dm.org/Codibre/multi-serializer)
 [![npm version](https://badge.fury.io/js/%40codibre%2Fmulti-serializer.svg)](https://badge.fury.io/js/%40codibre%2Fmulti-serializer)
 
-This libs aims to offer an optimized and standardized way to combine multiple serializing strategies into one simple call
+This libs aim to offer an optimized and standardized way to combine multiple serializing strategies into one simple call
 
 ## How to Install
 
