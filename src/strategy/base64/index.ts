@@ -36,13 +36,11 @@ export class Base64Strategy implements ChainSerializerStrategy<string> {
 		mode: SerializerMode.SYNC,
 	});
 
-	constructor(private options?: Base64Options) {
+	constructor(options?: Base64Options) {
 		this.serialize =
-			this.options?.mode === SerializerMode.SYNC ? serialize : promiseSerialize;
+			options?.mode === SerializerMode.SYNC ? serialize : promiseSerialize;
 		this.deserialize =
-			this.options?.mode === SerializerMode.SYNC
-				? deserialize
-				: promiseDeserialize;
+			options?.mode === SerializerMode.SYNC ? deserialize : promiseDeserialize;
 	}
 
 	readonly serialize: (

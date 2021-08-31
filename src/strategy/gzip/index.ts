@@ -22,17 +22,17 @@ export interface GzipOptions extends ZlibOptions {
 export class GzipStrategy
 	implements ChainSerializerStrategy<Stream | Serialized>, OptionalDeserializer
 {
-	constructor(private options?: GzipOptions) {
+	constructor(options?: GzipOptions) {
 		const deserialize =
-			this.options?.mode === SerializerMode.SYNC
+			options?.mode === SerializerMode.SYNC
 				? gunzipSync
-				: (r: Serialized) => pipeStream(r, createGunzip(this.options));
+				: (r: Serialized) => pipeStream(r, createGunzip(options));
 		this.deserialize = (content) =>
 			resolver(concatStream(content), (r) =>
 				this.mustDeserialize(r) ? deserialize(r) : r,
 			);
 		const gzipAsync = (content: Serialized | Stream) =>
-			pipeStream(content, createGzip(this.options));
+			pipeStream(content, createGzip(options));
 		this.serialize = (content) =>
 			isStream(content) ? gzipAsync(content) : gzipSync(content);
 	}
