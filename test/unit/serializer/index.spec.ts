@@ -378,11 +378,11 @@ describe('index.ts', () => {
 			.mockImplementationOnce(() =>
 				wait(2).then(call2).then(constant('result 2')),
 			);
-		jest
-			.spyOn(Serializer.prototype, 'serializeFactory' as any)
-			.mockReturnValue(spyTest);
 
-		const target = new Serializer(jsonStrategy, { enqueue: 1 });
+		const target = new Serializer(
+			{ serialize: spyTest, deserialize: spyTest },
+			{ enqueue: 1 },
+		);
 
 		const result1 = target.serialize('data 1');
 		const result2 = await target.serialize('data 2');
@@ -403,11 +403,11 @@ describe('index.ts', () => {
 			.mockImplementationOnce(() =>
 				wait(2).then(call2).then(constant('result 2')),
 			);
-		jest
-			.spyOn(Serializer.prototype, 'serializeFactory' as any)
-			.mockReturnValue(spyTest);
 
-		const target = new Serializer(jsonStrategy, { enqueue: 2 });
+		const target = new Serializer(
+			{ serialize: spyTest, deserialize: spyTest },
+			{ enqueue: 2 },
+		);
 
 		const result1 = target.serialize('data 1');
 		const result2 = await target.serialize('data 2');
@@ -432,11 +432,11 @@ describe('index.ts', () => {
 			.mockImplementationOnce(() =>
 				wait(2).then(call3).then(constant('result 3')),
 			);
-		jest
-			.spyOn(Serializer.prototype, 'serializeFactory' as any)
-			.mockReturnValue(spyTest);
 
-		const target = new Serializer(jsonStrategy, { enqueue: 2 });
+		const target = new Serializer(
+			{ serialize: spyTest, deserialize: spyTest },
+			{ enqueue: 2 },
+		);
 
 		const result1 = target.serialize('data 1');
 		const result2 = target.serialize('data 2');
@@ -465,11 +465,8 @@ describe('index.ts', () => {
 			.mockImplementationOnce(() =>
 				wait(2).then(call3).then(constant('result 3')),
 			);
-		jest
-			.spyOn(Serializer.prototype, 'serializeFactory' as any)
-			.mockReturnValue(spyTest);
 
-		const target = new Serializer(jsonStrategy);
+		const target = new Serializer({ serialize: spyTest, deserialize: spyTest });
 
 		const result1 = target.serialize('data 1');
 		const result2 = target.serialize('data 2');
