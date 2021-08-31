@@ -1,4 +1,4 @@
-[fluent-iterable - v0.3.0](../README.md) / OptionalDeserializer
+[fluent-iterable - v0.4.0](../README.md) / OptionalDeserializer
 
 # Interface: OptionalDeserializer
 

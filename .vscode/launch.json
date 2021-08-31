@@ -14,7 +14,7 @@
 				"cwd": "${workspaceRoot}",
 				"runtimeArgs": ["-r", "ts-node/register"],
 				"args": [
-          "${workspaceRoot}/src/index.ts"
+          "${workspaceRoot}/test/benchmark.ts"
         ]
 			},
       {
