@@ -1,5 +1,8 @@
 
-## 0.4.0
+## 0.4.1
+* 021b4f5 Fixing async serializing for gzip
+## v0.4.0
+* 17579a2 0.4.0
 * 55ab8d7 removing unneeded properties
 * b868e74 more performance improvements
 * 519c9e5 impoving more
