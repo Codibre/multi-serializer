@@ -1,4 +1,4 @@
-[fluent-iterable - v0.4.1](../README.md) / SerializerMode
+[fluent-iterable - v0.4.2](../README.md) / SerializerMode
 
 # Enumeration: SerializerMode
 

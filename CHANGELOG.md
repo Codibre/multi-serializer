@@ -1,5 +1,10 @@
 
-## 0.4.1
+## 0.4.2
+* 812454b writing readme
+* f4b7a79 Merge pull request #19 from Codibre/performance
+* 055fe07 Merge pull request #18 from Codibre/performance
+## v0.4.1
+* bfbab41 0.4.1
 * 021b4f5 Fixing async serializing for gzip
 ## v0.4.0
 * 17579a2 0.4.0
