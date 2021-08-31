@@ -1,4 +1,4 @@
-[fluent-iterable - v0.4.0](../README.md) / ProtobufStrategy
+[fluent-iterable - v0.4.1](../README.md) / ProtobufStrategy
 
 # Class: ProtobufStrategy<A\>
 
